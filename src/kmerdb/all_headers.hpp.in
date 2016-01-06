@@ -1,0 +1,5 @@
+#ifndef __KMERDB_ALL_HEADERS__
+#define __KMERDB_ALL_HEADERS__
+${ALL_HEADERS}
+#include "${PERM_INCLUDE_DIRS}/jemalloc/pallocator.h"
+#endif
