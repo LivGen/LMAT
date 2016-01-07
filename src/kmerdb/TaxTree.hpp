@@ -1,7 +1,9 @@
 #ifndef __TAX_TREE__
 #define __TAX_TREE__
 
-#include <ext/hash_map>
+#include <unordered_map>
+using namespace std;
+#define hash_map unordered_map
 #include <set>
 #include <map>
 #include <iostream>
@@ -16,7 +18,7 @@ namespace metag {
 
 
 template<class tid_T>
-class TaxTree : public __gnu_cxx::hash_map<tid_T, TaxNode<tid_T>*> {
+class TaxTree : public hash_map<tid_T, TaxNode<tid_T>*> {
 public :
 
   TaxTree(const char *nodes_fn) {
@@ -155,7 +157,7 @@ public :
 
   //! returns LCA; on return, children will contain all entries in the input tax_ids set, plus the lca
   //! plus all tax IDs between the tax_ids and the LCA
-  tid_T getLcaMap(const set<tid_T> &tax_ids, __gnu_cxx::hash_map<tid_T, set<tid_T> > &children) const {
+  tid_T getLcaMap(const set<tid_T> &tax_ids, hash_map<tid_T, set<tid_T> > &children) const {
     children.clear();
 
     if (! tax_ids.size()) {

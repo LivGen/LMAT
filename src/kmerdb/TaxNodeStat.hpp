@@ -15,7 +15,7 @@
 #include <vector>
 #include <queue>
 
-typedef  __gnu_cxx::hash_map<uint16_t,uint32_t> id_convback_map_t;
+typedef  hash_map<uint16_t,uint32_t> id_convback_map_t;
 
 
 

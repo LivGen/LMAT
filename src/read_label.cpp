@@ -12,8 +12,8 @@
 #include "all_headers.hpp"
 #include "TaxNodeStat.hpp"
 #include "tid_checks.hpp"
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
+#include <unordered_map>
+#include <unordered_set>
 #include <gzstream.h>
 
 #include <version.h>
@@ -33,6 +33,7 @@ using std::endl;
 using std::string;
 using std::vector;
 using std::istringstream;
+using namespace std;
 using namespace metag;
 
 static bool verbose=false;
@@ -46,11 +47,11 @@ typedef pair<TID_T,uint16_t> tax_elem_t;
 typedef set<tax_elem_t> tax_data_t;
 typedef pair<int16_t,tax_data_t> label_info_t;
 typedef map<TID_T,TID_T> hmap_t;
-typedef std::tr1::unordered_map<TID_T,float> ufmap_t;
-typedef std::tr1::unordered_map<TID_T,vector<float> > uvfmap_t;
-typedef std::tr1::unordered_map<TID_T,string> usmap_t;
-typedef std::tr1::unordered_map<uint16_t, uvfmap_t> u_ufmap_t;
-typedef std::tr1::unordered_map<uint16_t, usmap_t> u_usmap_t;
+typedef unordered_map<TID_T,float> ufmap_t;
+typedef unordered_map<TID_T,vector<float> > uvfmap_t;
+typedef unordered_map<TID_T,string> usmap_t;
+typedef unordered_map<uint16_t, uvfmap_t> u_ufmap_t;
+typedef unordered_map<uint16_t, usmap_t> u_usmap_t;
 typedef pair<string,string> read_pair;
 
 
@@ -58,9 +59,9 @@ static bool gPERMISSIVE_MATCH = false;
 vector <int> read_len_vec(1,0);
 vector <int> read_len_avgs(1,0);
 
-static std::tr1::unordered_map<int,string> gNum2rank;
-static std::tr1::unordered_map<string,int> gRank2num;
-static std::tr1::unordered_set<int> gLowNumPlasmid;
+static unordered_map<int,string> gNum2rank;
+static unordered_map<string,int> gRank2num;
+static unordered_set<int> gLowNumPlasmid;
 
 #define _USE_KPATH_IDS 0
 
@@ -738,8 +739,8 @@ construct_labels(const TaxTree<TID_T>& tax_tree, const vector<label_info_t>& lab
 
    ufmap_t all_cand_set;
    bool hasHuman=false;
-   std::tr1::unordered_map<string,float> track;
-   std::tr1::unordered_map<string,float> counter;
+   unordered_map<string,float> track;
+   unordered_map<string,float> counter;
    for(unsigned tax_idx = 0; tax_idx < num_tax_ids; ++tax_idx) {
       float found_genome_cnt = 0;
       const TID_T taxid = (*(idx2taxid.find(tax_idx))).second;
@@ -1096,7 +1097,7 @@ pair<int,int> retrieve_kmer_labels(INDEXDB<DBTID_T>* table, const char* str, con
                 }
              }
           } else {
-             std::tr1::unordered_set<TID_T> non_leaf; 
+             unordered_set<TID_T> non_leaf; 
              for(unsigned i = 0; i < obs_tids_vec.size(); ++i) {
                 const TID_T tid=obs_tids_vec[i];
                 if( non_leaf.find(tid) == non_leaf.end() ) {
@@ -1161,7 +1162,7 @@ pair<int,int> retrieve_kmer_labels(INDEXDB<DBTID_T>* table, const char* str, con
             //save_spec_rep.insert(make_pair(stid,make_pair(stid,stid_cnt)));
          }
       }
-      std::tr1::unordered_set<TID_T> rep_strain;
+      unordered_set<TID_T> rep_strain;
       map<TID_T,pair<TID_T,unsigned> >::const_iterator sb1=save_spec_rep.begin(); 
       map<TID_T,pair<TID_T,unsigned> >::const_iterator se1=save_spec_rep.end(); 
       for( ; sb1 != se1; ++sb1) {

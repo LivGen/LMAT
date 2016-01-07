@@ -221,7 +221,7 @@ void doit(string &taxtree_fn, string &kmer_db_fn, string &outfile, string &ranks
     //allen99 quick hack to remove human k-mers
     bool doWrite=true;
 
-    __gnu_cxx::hash_map<tid_T, set<tid_T> > tid_set;
+    hash_map<tid_T, set<tid_T> > tid_set;
 
     /*
 
@@ -266,7 +266,7 @@ void doit(string &taxtree_fn, string &kmer_db_fn, string &outfile, string &ranks
 
 	//write the tax IDs
 
-	for (typename __gnu_cxx::hash_map<tid_T, set<tid_T> >::const_iterator t = tid_set.begin(); t != tid_set.end(); t++) {	  
+	for (typename hash_map<tid_T, set<tid_T> >::const_iterator t = tid_set.begin(); t != tid_set.end(); t++) {	  
 	  tid_T tid = t->first;
 
 	  if(doWrite) assert(fwrite(&tid,4, 1, out_bin) == 1);

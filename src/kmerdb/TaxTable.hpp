@@ -1,7 +1,9 @@
 #ifndef __TAX_TABLE__
 #define __TAX_TABLE__
 
-#include <ext/hash_map>
+#include <unordered_map>
+using namespace std;
+#define hash_map unordered_map
 #include <iostream>
 #include <set>
 #include <map>
@@ -70,14 +72,14 @@ TaxTableHash;
 
 #elif defined _MMAP_MALLOC
 
-typedef __gnu_cxx::hash_map<uint64_t, std::pair<uint32_t, uint8_t>, __gnu_cxx::hash<uint64_t>, __gnu_cxx::equal_to<uint64_t>,  PERM_NS::allocator<std::pair<uint32_t, uint8_t> > > TaxTableHash;
+typedef hash_map<uint64_t, std::pair<uint32_t, uint8_t>, hash<uint64_t>, equal_to<uint64_t>,  PERM_NS::allocator<std::pair<uint32_t, uint8_t> > > TaxTableHash;
 
 #elif WITH_PJMALLOC == 1
 
-typedef __gnu_cxx::hash_map<uint64_t, std::pair<uint32_t, uint8_t>, __gnu_cxx::hash<uint64_t>, __gnu_cxx::equal_to<uint64_t>,  PERM_NS::allocator<std::pair<uint32_t, uint8_t> > > TaxTableHash;
+typedef hash_map<uint64_t, std::pair<uint32_t, uint8_t>, hash<uint64_t>, equal_to<uint64_t>,  PERM_NS::allocator<std::pair<uint32_t, uint8_t> > > TaxTableHash;
 
 #else
-typedef __gnu_cxx::hash_map<uint64_t, std::pair<uint32_t, uint8_t> > TaxTableHash;
+typedef hash_map<uint64_t, std::pair<uint32_t, uint8_t> > TaxTableHash;
 #endif
 
 template<class tid_T>

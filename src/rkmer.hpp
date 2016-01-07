@@ -1,7 +1,7 @@
 #ifndef _RKMER_HPP
 #define _RKMER_HPP
 
-#include <tr1/unordered_set>
+#include <unordered_set>
 
 
 typedef map<TID_T,unsigned> cmap_t;
@@ -16,6 +16,8 @@ extern bool tid_map_is_strain_species;
 extern bool verbose;
 extern bool gPERMISSIVE_MATCH;
 extern map<TID_T,string> gRank_table;
+
+using namespace std;
 
 struct CmpDepth1 {
    CmpDepth1(const hmap_t& imap) : _imap(imap) {}
@@ -184,7 +186,7 @@ pair<int,int> retrieve_kmer_labels(INDEXDB<DBTID_T>* table, const char* str, con
                 }
              }
           } else {
-             std::tr1::unordered_set<TID_T> non_leaf; 
+             unordered_set<TID_T> non_leaf; 
              for(unsigned i = 0; i < obs_tids_vec.size(); ++i) {
                 const TID_T tid=obs_tids_vec[i];
                 if( non_leaf.find(tid) == non_leaf.end() ) {
@@ -248,7 +250,7 @@ pair<int,int> retrieve_kmer_labels(INDEXDB<DBTID_T>* table, const char* str, con
              } 
          }
       }
-      std::tr1::unordered_set<TID_T> rep_strain;
+      unordered_set<TID_T> rep_strain;
       map<TID_T,pair<TID_T,unsigned> >::const_iterator sb1=save_spec_rep.begin(); 
       map<TID_T,pair<TID_T,unsigned> >::const_iterator se1=save_spec_rep.end(); 
       for( ; sb1 != se1; ++sb1) {

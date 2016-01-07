@@ -37,10 +37,10 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+*.dSYM
 
 # Others #
 ##########
-*.cmake
 *.bkp
 *.swp
 *.desktop

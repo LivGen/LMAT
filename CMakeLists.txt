@@ -6,26 +6,39 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
 #
 
 # Choose compiler family by env var COMPILER_FAMILY
-IF(COMPILER_FAMILY STREQUAL "intel")
-  SET(IS_INTEL TRUE)
+# Force compilers (do it before PROJECT!). Default are GNU.
+if(COMPILER_FAMILY STREQUAL "intel")
+  set(IS_INTEL TRUE)
   MESSAGE("CMAKE parsing CMakeLists.txt for LMAT by INTEL Compilers...")
-ELSE()
-  SET(IS_INTEL FALSE)
-  MESSAGE("CMAKE parsing CMakeLists.txt for LMAT by GNU Compilers...")
-ENDIF()
-
-IF(IS_INTEL)
-  # Force Intel Compilers (do it before PROJECT!)
   INCLUDE(CMakeForceCompiler)
   MESSAGE("Enforcing Intel compilers!")
   set(CMAKE_C_COMPILER icc)
   set(CMAKE_CXX_COMPILER icpc)
   set(CMAKE_Fortran_COMPILER ifort)
-ELSE()
-  set(CMAKE_C_COMPILER gcc)
-  set(CMAKE_CXX_COMPILER g++)
-  set(CMAKE_Fortran_COMPILER gfortran)  
-ENDIF(IS_INTEL)
+elseif(COMPILER_FAMILY STREQUAL "clang")
+  set(IS_CLANG TRUE)
+  MESSAGE("CMAKE parsing CMakeLists.txt for LMAT by CLANG w/OpenMP Compilers...")
+  if(APPLE)  
+    set(CMAKE_C_COMPILER clang-mp-3.8)
+    set(CMAKE_CXX_COMPILER clang++-mp-3.8)
+  else()
+    set(CMAKE_C_COMPILER clang)
+    set(CMAKE_CXX_COMPILER clang++)
+  endif(APPLE)
+else()
+  set(IS_GNU TRUE)
+  MESSAGE("CMAKE parsing CMakeLists.txt for LMAT by GNU Compilers...")
+  if(APPLE)  
+    set(CMAKE_C_COMPILER gcc-mp-4.9)
+    set(CMAKE_CXX_COMPILER g++-mp-4.9)
+    set(CMAKE_Fortran_COMPILER gfortran-mp-4.9)  
+  else()
+    set(CMAKE_C_COMPILER gcc)
+    set(CMAKE_CXX_COMPILER g++)
+    set(CMAKE_Fortran_COMPILER gfortran)  
+  endif(APPLE)
+endif()
+
 
 #
 # Parse user options and flags
@@ -115,7 +128,7 @@ set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -w -Wno-deprecated")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -w -Wno-deprecated")
 
 # Specific Intel compiler flags
-IF(IS_INTEL)
+IF(DEFINED IS_INTEL)
   # Enable host architecture optimizations.
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -xhost")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -xhost")
@@ -132,6 +145,12 @@ IF(IS_INTEL)
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -g -O3 -traceback -debug parallel")
 ENDIF()
 
+# Specific LLVM/clang compiler flags
+if(DEFINED IS_CLANG)
+  if(NOT APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem /software/gcc-4.9.3/include/c++/4.9.3 -I/software/gcc-4.9.3/include/c++/4.9.3/x86_64-unknown-linux-gnu")
+  endif()
+endif()
 
 #
 # Attend external dependencies
@@ -338,15 +357,19 @@ add_subdirectory(src)
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Livermore Metagenomics Analysis Toolkit")
 SET(CPACK_PACKAGE_DESCRIPTION_VENDOR "Lawrence Livermore National Laboratory")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
 SET(CPACK_PACKAGE_VERSION_MAJOR "1")
 SET(CPACK_PACKAGE_VERSION_MINOR "2")
 SET(CPACK_PACKAGE_VERSION_PATCH "4")
-IF(IS_INTEL)
+IF(DEFINED IS_INTEL)
   SET(CPACK_PACKAGE_VERSION_TWEAK "intel")
-ELSE()
+ELSEIF(DEFINED IS_GNU)
   SET(CPACK_PACKAGE_VERSION_TWEAK "gnu")
+ELSEIF(DEFINED IS_CLANG)
+  SET(CPACK_PACKAGE_VERSION_TWEAK "clang")
+ELSE()
+  SET(CPACK_PACKAGE_VERSION_TWEAK "unknown")
 ENDIF()
 SET(CPACK_GENERATOR "TGZ")
 

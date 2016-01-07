@@ -11,8 +11,8 @@
 #include <omp.h>
 #include "tid_checks.hpp"
 #include "all_headers.hpp"
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
+#include <unordered_map>
+#include <unordered_set>
 #include <gzstream.h>
 #include <version.h>
 
@@ -26,8 +26,8 @@ using std::string;
 using std::vector;
 using std::istringstream;
 
+using namespace std;
 using namespace metag;
-
 
 bool add_root_on_kmer_drop = true;
 
@@ -37,16 +37,16 @@ static bool VERBOSE=false;
 size_t perm_bytes_allocd;
 
 typedef map<TID_T,list<TID_T> > cand_lin_t;
-typedef std::tr1::unordered_map<TID_T,string> rank_map_t;
+typedef unordered_map<TID_T,string> rank_map_t;
 
 typedef pair<TID_T,signed> tid_call_t;
 typedef pair<TID_T,float> ufpair_t;
 typedef map<TID_T,TID_T> hmap_t;
 typedef map<TID_T,float> ufmap_t;
 typedef map<kmer_t,uint64_t> kmer_cnt_t;
-typedef std::tr1::unordered_map<TID_T,TID_T> tid_map_t;
+typedef unordered_map<TID_T,TID_T> tid_map_t;
 
-static std::tr1::unordered_set<int> gLowNumPlasmid;
+static unordered_set<int> gLowNumPlasmid;
 
 struct TObj {
    bool operator()(const ufpair_t& a, const ufpair_t& b) {

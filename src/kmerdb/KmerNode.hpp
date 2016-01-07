@@ -1,7 +1,7 @@
 #ifndef __KMER_NODE_WITH_TAX_ID_HPP__
 #define __KMER_NODE_WITH_TAX_ID_HPP__
 
-# define UINT16_MAX   (65535)
+//#define UINT16_MAX   (65535)
 
 #include <iostream>
 #include <ostream>
