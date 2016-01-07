@@ -1,18 +1,10 @@
 #ifndef __SORTED_DB_HPP__
 #define __SORTED_DB_HPP__
 
-
-
 #include <iostream>
 #include <set>
 #include <unordered_map>
 #include <unordered_set>
-using namespace std;
-#define hash_map unordered_map
-#define hash_set unordered_set
-//#include <ext/hash_map>
-//#include <ext/hash_set>
-
 #include <vector>
 #include <string>
 #include <iostream>
@@ -22,15 +14,12 @@ using namespace std;
 #include <cstdlib>
 #include <string.h>
 
-
 #include <metag_const.h>
 #include "metag_typedefs.hpp"
-
 
 #if (WITH_PJMALLOC == 0)
 #define JEMALLOC_P(x) x
 #endif
-
 
 #undef PAGE_SIZE
 #undef MAX_PAGE
@@ -39,9 +28,7 @@ using namespace std;
 #define MAX_PAGE 255  // would be 35535 for 16 bit field
 
 
-
 // 18-mer
-
 
 
 // 20-mer
@@ -56,9 +43,7 @@ using namespace std;
 #define MASK_2ND_20 0x0000000000001fff
 #define LENGTH_MAX_2ND_20 8193
 
-
 #if (IDX_CONFIG == 2031)
-
 
 #define TT_BLOCK_COUNT 2147483648
 #define BITS_PER_2ND 9
@@ -108,14 +93,12 @@ using namespace std;
 #define MASK_2ND 0x0000000000007fff
 #define LENGTH_MAX_2ND 32769
 
-
 #elif (IDX_CONFIG == 2024)
 
 #define TT_BLOCK_COUNT  16777216
 #define BITS_PER_2ND 16
 #define MASK_2ND 0x000000000000ffff
 #define LENGTH_MAX_2ND 65537
-
 
 #elif (IDX_CONFIG == 1827)
 
@@ -129,15 +112,15 @@ using namespace std;
 #include <perm.h>
 
 
-typedef hash_map<uint32_t,uint32_t> my_map;
-typedef hash_map<uint32_t,uint16_t> bitreduce_map_t;
-typedef hash_set<uint64_t> kmer_set_t;
-
 #define mcpyoutsdb(dest, page, off, len) memcpy(&dest, m_storage_space+(PAGE_SIZE*page)+off, len)
 #define mcpyinsdb(src, len) memcpy(m_storage_space+(m_cur_page*PAGE_SIZE)+m_cur_offset, &src, len)
-
 #define mcpyinsdbt(src, len, i) memcpy(m_storage_space+(m_cur_page_arr[i]*PAGE_SIZE)+m_cur_offset_arr[i], &src, len)
 
+using namespace std;
+
+typedef unordered_map<uint32_t,uint32_t> my_map;
+typedef unordered_map<uint32_t,uint16_t> bitreduce_map_t;
+typedef unordered_set<uint64_t> kmer_set_t;
 
 
 namespace metag {
@@ -378,7 +361,7 @@ namespace metag {
          }
          return true;
          }
-         */	
+         */
         
         void next(uint32_t &offset_out_in, uint8_t &page_in, tid_T &taxid_out) {
             
@@ -413,7 +396,7 @@ namespace metag {
             for (i = 0 ; i < TT_BLOCK_COUNT; i++) {
                 int idx = i / factor;
                 
-                if (i % size == 0) 
+                if (i % size == 0)
                     in_arr[idx] = 0;
                 
                 in_arr[idx] += (top_tier_block[i] >> 48);
@@ -425,7 +408,7 @@ namespace metag {
         }
         
 #ifdef USE_BOOST
-        void conv_ptrs() 
+        void conv_ptrs()
         {
             //    if (strcmp(boost_version, BOOST_LIB_VERSION) != 0)
             //  std::cout << "Warning! This application built with boos libraries v. " << BOOST_LIB_VERSION << ", database built with " << boost_version << ". No guarantees of compatibility." ;
@@ -463,7 +446,7 @@ namespace metag {
         
 #ifdef USE_BOOST
         //  char *boost_version;
-        //#elif (WITH_PJMALLOC == 1) 
+        //#elif (WITH_PJMALLOC == 1)
         //  char *perm_je_version;
 #endif
         
@@ -473,14 +456,14 @@ namespace metag {
         
         uint8_t m_kmer_length;
         
-#ifdef USE_BOOST  
+#ifdef USE_BOOST
         bip::offset_ptr<char> m_storage_space_op;
         bip::offset_ptr<kmer_record> m_kmer_table_op;
         bip::offset_ptr<uint64_t> m_top_tier_block_op;
 #endif
         
         char *m_storage_space;
-        kmer_record *kmer_table; 
+        kmer_record *kmer_table;
         uint64_t *top_tier_block;
         
         

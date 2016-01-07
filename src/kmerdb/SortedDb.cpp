@@ -515,7 +515,7 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
                     }
                     
                 }
-            } 
+            }
             else if (tmp_tid_count == 1) {
                 
                 
@@ -536,7 +536,7 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
                 }
                 reduced_kmers++;
             } else {
-                assert(tmp_tid_count == 0);      
+                assert(tmp_tid_count == 0);
                 kmer_table[m_list_offset].page_id = MAX_PAGE;
                 kmer_table[m_list_offset].page_offset = 1;
                 cut_kmers++;
@@ -559,19 +559,19 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
                     mcpyinsdb(kmer, 8);
                     m_cur_offset += 8;
                     
-                }	
+                }
                 
                 mcpyinsdb(tmp_tid_count, 2);
                 m_cur_offset += 2;
                 
-                //      if (add_human) 
+                //      if (add_human)
                 //cout << "kmer-match: " << kmer;
                 
                 for (int i=0; i < tmp_tid_count; i++) {
                     
                     tid = taxid_q.top().second;
                     
-                    //	if (add_human) 
+                    //	if (add_human)
                     //cout << " " << taxid_q.top().first << " " << tid;
                     
                     taxid_q.pop();
@@ -593,8 +593,8 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
                     }
                     
                     ext_taxids++;
-                } // end for 
-                //      if (add_human) 
+                } // end for
+                //      if (add_human)
                 //cout << "\n";
                 
             }
@@ -613,7 +613,7 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
                 
                 
                 
-                // save the offset in case we have a human match to something else      
+                // save the offset in case we have a human match to something else
                 
                 
                 m_cur_offset += 2;
@@ -626,7 +626,7 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
                 for (uint16_t k=0; k<tid_count; k++) {
                     
                     ext_taxids++;
-                    assert(fread(&tid, 4, 1, in) == 1);        
+                    assert(fread(&tid, 4, 1, in) == 1);
                     
                     if (tid == 9606)
                         add_human = false;
@@ -675,7 +675,7 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
                         
                         
                         
-                        //	  cout << "adding-tid " ; 
+                        //	  cout << "adding-tid " ;
                         
                         mcpyinsdb(tid_16, 2);
                         m_cur_offset += 2;
@@ -719,7 +719,7 @@ void SortedDb<tid_T>::add_data(const char *filename, size_t stopper, bool use_ta
             if ((i+1) % TAX_HISTO_SANITY_COUNT == 0) {
                 assert(fread(&test, sizeof(uint64_t), 1, in) == 1);
                 assert(test == sanity);
-            }  
+            }
         } else {
             if ((i+1) % KMER_SANITY_COUNT == 0) {
                 assert(fread(&test, sizeof(uint64_t), 1, in) == 1);
