@@ -181,7 +181,7 @@ ENDIF(OPENMP_FOUND)
 include(ExternalProject)
 ExternalProject_Add(PERM
   PREFIX ${CMAKE_BINARY_DIR}/third-party
-  URL http://computation.llnl.gov/project/perma/downloads/perm-je-0.9.7.tgz
+  URL https://computation.llnl.gov/projects/memory-centric-architectures/download/perm-je-0.9.7.tgz
   DOWNLOAD_NO_PROGRESS 1  
   CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=<INSTALL_DIR> CXX=${CMAKE_CXX_COMPILER}
   BUILD_COMMAND make -j 16

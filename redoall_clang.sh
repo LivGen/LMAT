@@ -11,11 +11,10 @@
 #	M for MinSizeRel
 # For just cleaning the parameter is 'clean'
 #
-# JMMM - Januay 2016 - Rel. 0.1
-#
+# JMMM - April 2017 - Rel. 0.2
 
 # This is specific to LC
-echo "Preparing environment in LC clusters to CLANG..."
+echo "Preparing environment for CLANG..."
 #use gcc-4.9.2p
 # This is specific to SOM
 #module -s load gcc/gcc-4.9.0 cmake/3.0.0 openmpi/1.8.1/gnu 
@@ -26,7 +25,9 @@ echo "Preparing environment in LC clusters to CLANG..."
 comp="-D COMPILER_FAMILY=clang" 
 echo "Performing the total reconf and rebuild..."
 make clean
-rm -Rf *.cmake Makefile src/Makefile src/CMakeCache.txt src/*.cmake CMakeCache.txt src/kmerdb/all_headers.hpp CMakeFiles/ src/CMakeFiles/ third-party/*
+rm -Rf *.cmake Makefile src/Makefile src/CMakeCache.txt src/*.cmake CMakeCache.txt src/kmerdb/all_headers.hpp CMakeFiles/ src/CMakeFiles/
+find bin/ -type f  ! -name "*.*"  -delete
+find third-party/. -mindepth 1 ! -name "README" -exec rm -rf "{}" +
 if [ -n "$1" ]
 then
   if [ $1 = "clean" ]

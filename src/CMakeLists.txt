@@ -1,6 +1,8 @@
 # -*- cmake -*-
 MESSAGE("CMAKE parsing CMakeLists.txt inside SRC...")
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 # Add the test programs to the build
 FILE(GLOB lmat_apps ./*.cpp)
 

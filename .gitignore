@@ -26,6 +26,7 @@
 *.log
 *.sql
 *.sqlite
+*.logfile
 
 # OS generated files #
 ######################
@@ -49,4 +50,11 @@ Thumbs.db
 *.kk
 *.???#
 *.old
-*.logfile
+.idea/*
+*.cbp
+cmake-build-debug/
+
+# package specifics #
+#####################
+runtime_inputs/
+
