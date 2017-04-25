@@ -136,7 +136,7 @@ IF(DEFINED IS_INTEL)
   # Add further flags depending on build type
   set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -traceback -rdynamic -debug parallel -check=conversions,stack,uninit -ftrapuv -check-pointers=rw -check-pointers-dangling=all -check-pointers-undimensioned -fp-model precise -fp-model source")
   #Requires Intel XE 13.1 
-  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -traceback -rdynamic -debug parallel -check-uninit -ftrapuv -check-pointers=rw -check-pointers-dangling=all -check-pointers-undimensioned -fp-model precise -fp-model source")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -traceback -rdynamic -debug parallel -ftrapuv -check-pointers=rw -check-pointers-dangling=all -check-pointers-undimensioned -fp-model precise -fp-model source")
   #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -traceback -rdynamic -debug parallel -check=conversions,stack,uninit -ftrapuv -fp-model precise -fp-model source")
   
   set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O3")
