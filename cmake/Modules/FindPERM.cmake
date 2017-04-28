@@ -17,25 +17,36 @@
 #  PERM_LIBRARIES         The PERM library/libraries
 #  PERM_INCLUDE_DIRS      The location of PERM headers
 
-find_path(PERM_ROOT_DIR
-  NAMES include/jemalloc/pallocator.h
+set(PERM_ROOT_DIR ${CMAKE_BINARY_DIR}/third-party)
+
+#find_path(PERM_ROOT_DIR
+#  NAMES include/jemalloc/pallocator.h
+#  )
+
+find_library(PERM_LIBRARY
+  NAMES jemalloc perm-je
+  PATHS ${PERM_ROOT_DIR}/lib
   )
 
-find_library(PERM_LIBRARIES
-  NAMES jemalloc
-  HINTS ${PERM_ROOT_DIR}/lib
-  )
-
-find_path(PERM_INCLUDE_DIRS
+find_path(PERM_INCLUDE_DIR
   NAMES jemalloc/pallocator.h
-  HINTS ${PERM_ROOT_DIR}/include
+  PATH ${PERM_ROOT_DIR}/include
   )
+
+MESSAGE("  ... from this root dir: ${PERM_ROOT_DIR}")
+MESSAGE("  ... with these include directories: ${PERM_INCLUDE_DIRS}")
+MESSAGE("  ... with these libraries: ${PERM_LIBRARIES}")
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(PERM DEFAULT_MSG
-  PERM_LIBRARIES
-  PERM_INCLUDE_DIRS
-  )
+# handle the QUIETLY and REQUIRED arguments and set <PackageName>_FOUND to TRUE
+# if all listed variables are TRUE
+find_package_handle_standard_args(PERM DEFAULT_MSG PERM_INCLUDE_DIR PERM_LIBRARY)
+
+if (PERM_FOUND)
+    set(PERM_LIBRARIES ${PERM_LIBRARY} )
+    set(PERM_INCLUDE_DIRS ${PERM_INCLUDE_DIR} )
+    set(PERM_DEFINITIONS )
+endif()
 
 mark_as_advanced(
   PERM_ROOT_DIR

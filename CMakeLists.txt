@@ -1,5 +1,5 @@
 # -*- cmake -*-
-CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 
 #
 # Compiler family selection
@@ -105,7 +105,6 @@ ENDIF()
 
 project(LMAT VERSION 1.2.4.0 LANGUAGES C CXX)
 
-
 #
 # Add the right compiler flags
 #
@@ -175,6 +174,8 @@ IF(OPENMP_FOUND)
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
   SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+ELSE(OPENMP_FOUND)
+  MESSAGE(FATAL_ERROR "OpenMP not found!")
 ENDIF(OPENMP_FOUND)
 
 # Install and check PERM (over JeMalloc)
@@ -192,24 +193,12 @@ ExternalProject_Add(PERM
 )
 add_library(jemalloc STATIC IMPORTED)
 add_dependencies(jemalloc PERM)
-#target_link_libraries(LMAT jemalloc)
-set(PERM_ROOT_DIR ${CMAKE_BINARY_DIR}/third-party)
-set(PERM_LIBRARIES ${PERM_ROOT_DIR}/lib/libjemalloc.a)
-set(PERM_INCLUDE_DIRS ${PERM_ROOT_DIR}/include)
-set(PERM_FOUND 1)
-mark_as_advanced(FORCE
-  PERM_ROOT_DIR
-  PERM_LIBRARIES
-  PERM_INCLUDE_DIRS
-  PERM_FOUND
-  )
-#FIND_PACKAGE(PERM REQUIRED)
-IF(PERM_FOUND)
-  MESSAGE("We'll try to use PERM(JeMalloc)...")
-  MESSAGE("  ... from this root dir: ${PERM_ROOT_DIR}")
-  MESSAGE("  ... with these include directories: ${PERM_INCLUDE_DIRS}")
-  MESSAGE("  ... with these libraries: ${PERM_LIBRARIES}")
-ENDIF(PERM_FOUND)
+set(PERM_LIB ${CMAKE_BINARY_DIR}/third-party/lib/libjemalloc.a)
+set_target_properties(jemalloc PROPERTIES IMPORTED_LOCATION ${PERM_LIB})
+message("We'll try to use PERM(JeMalloc)...")
+message("  ... with these libraries: ${PERM_LIB}")
+# Set include dirs as needed by all_headers.hpp.in inside kmerdb
+set(PERM_INCLUDE_DIRS ${CMAKE_BINARY_DIR}/third-party/include)
 
 # Look for thread library
 SET(THREADS_PREFER_PTHREAD_FLAG ON)
@@ -220,8 +209,6 @@ IF(THREADS_FOUND)
     MESSAGE("As preferred, pthreads is to be used.")
   ENDIF(CMAKE_USE_PTHREADS_INIT)
 ENDIF(THREADS_FOUND)
-##### ADD THIS
-##### target_link_libraries(my_app Threads::Threads)
 
 # Look for Boost
 #FIND_PACKAGE(Boost)
@@ -238,13 +225,8 @@ IF(ZLIB_FOUND)
   MESSAGE("  ... with these include directories: ${ZLIB_INCLUDE_DIRS}")
   MESSAGE("  ... with these libraries: ${ZLIB_LIBRARIES}")
 ENDIF(ZLIB_FOUND)
-##### ADD THIS
-##### target_link_libraries(my_app ZLIB::ZLIB)
 
 # libgzstream as IMPORTED target library
-#add_library(gzstream STATIC IMPORTED)
-#set_property(TARGET gzstream PROPERTY IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/lib/libgzstream.a)
-# Install and check PERM (over JeMalloc)
 include(ExternalProject)
 ExternalProject_Add(GZ
   PREFIX ${CMAKE_BINARY_DIR}/third-party
@@ -262,40 +244,20 @@ ExternalProject_Add(GZ
 )
 add_library(gzstream STATIC IMPORTED)
 add_dependencies(gzstream GZ)
-#target_link_libraries(LMAT jemalloc)
-set(GZ_ROOT_DIR ${CMAKE_BINARY_DIR}/third-party)
-set(GZ_LIBRARIES ${GZ_ROOT_DIR}/lib/libgzstream.a)
-set(GZ_INCLUDE_DIRS ${GZ_ROOT_DIR}/include)
-set(GZ_FOUND 1)
-mark_as_advanced(FORCE
-  GZ_ROOT_DIR
-  GZ_LIBRARIES
-  GZ_INCLUDE_DIRS
-  GZ_FOUND
-  )
-#FIND_PACKAGE(PERM REQUIRED)
-IF(GZ_FOUND)
-  MESSAGE("We'll try to use gzstream...")
-  MESSAGE("  ... from this root dir: ${GZ_ROOT_DIR}")
-  MESSAGE("  ... with these include directories: ${GZ_INCLUDE_DIRS}")
-  MESSAGE("  ... with these libraries: ${GZ_LIBRARIES}")
-ENDIF(GZ_FOUND)
+set(GZSTREAM_LIB ${CMAKE_BINARY_DIR}/third-party/lib/libgzstream.a)
+set_target_properties(gzstream PROPERTIES IMPORTED_LOCATION ${GZSTREAM_LIB})
+message("We'll try to use GZstream...")
+message("  ... with these libraries: ${GZSTREAM_LIB}")
 
-
-#
 # Show summary information before the build
-#
-
 # Print build type and compiler flags
+message("<<<>>> SUMMARY <<<>>>")
 MESSAGE("The chosen type of build is: ${CMAKE_BUILD_TYPE}")
 STRING(TOUPPER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_UPPERCASE)
-MESSAGE("  with CXX complete flags: ${CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE_UPPERCASE}}")
-MESSAGE("  and linker flags: ${CMAKE_EXE_LINKER_FLAGS}")
+MESSAGE("  >>> with CXX complete flags: ${CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE_UPPERCASE}}")
+MESSAGE("  >>> and linker flags: ${CMAKE_EXE_LINKER_FLAGS}")
 
-
-#
 # Final message (build successful)
-#
 add_custom_target(_LMAT_1_2_4 ALL
                   COMMAND ${CMAKE_COMMAND} -E echo ""
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "=============================================="
@@ -311,11 +273,6 @@ add_custom_target(_LMAT_1_2_4 ALL
                   COMMAND ${CMAKE_COMMAND} -E echo ""
                  )
 
-
-#
-# Create metagen lib in the right place
-#
-
 # Dynamically configure a header file with all the headers of the library
 set(ALL_HEADERS_HPP ${CMAKE_SOURCE_DIR}/src/kmerdb/all_headers.hpp)
 file(GLOB metag_hdr src/kmerdb/*.hpp)
@@ -328,8 +285,12 @@ configure_file(
   "${ALL_HEADERS_HPP}.in"
   "${ALL_HEADERS_HPP}")
 
+#
+# Main library and LMAT apps 
+#
+
 # Directories that will be searched for headers during compilation
-include_directories(${CMAKE_SOURCE_DIR}/include ${PERM_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${GZ_INCLUDE_DIRS} ${ZLIB_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/src/kmerdb)
+include_directories(${CMAKE_SOURCE_DIR}/include ${PERM_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${ZLIB_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/src/kmerdb)
 
 file(GLOB metag_src src/kmerdb/*.cpp)
 
@@ -338,23 +299,15 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY src/kmerdb/lib)
 # Finally, create it!
 add_library(metag STATIC ${metag_src})
 set_target_properties(metag PROPERTIES VERSION 1.2.4 SOVERSION 2)
-target_link_libraries(metag ${PERM_LIBRARIES} Threads::Threads -ldl ${GZ_LIBRARIES} ZLIB::ZLIB ${Boost_LIBRARIES})
+target_link_libraries(metag jemalloc Threads::Threads -ldl gzstream ZLIB::ZLIB ${Boost_LIBRARIES})
+
 # Add the lib as dependency to the final message 
 add_dependencies(_LMAT_1_2_4 metag)
 
-
-#
-# Parse the LMAT apps
-#
-
-# Add the src programs to the build
+# Parse the LMAT apps (add the src programs to the build)
 add_subdirectory(src)
 
-
-#
 # Package-related stuff (use with "cpack")
-#
-
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Livermore Metagenomics Analysis Toolkit")
 SET(CPACK_PACKAGE_DESCRIPTION_VENDOR "Lawrence Livermore National Laboratory")
 SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
