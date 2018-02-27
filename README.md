@@ -1,18 +1,16 @@
 # Livermore  Metagenomics  Analysis  Toolkit
-**Taxonomic scoring and classification, content summarization
- and gene identification, an all-in-one metagenomic analysis toolkit**
+**Taxonomic classification, content summarization
+ and gene identification, an all-in-1 metagenomic analysis toolkit**
 ___
 ### Overview
 
-LMAT's main goal is to efficiently assign taxonomic labels to the reads with reference representation down to the species level but maintain accuracy in the presence of novel organisms.
+LMAT's main goal is to efficiently assign taxonomic labels to the reads with reference representation down to the species level while maintaining accuracy in the presence of novel organisms. Scalable performance is demonstrated on real and simulated data to show accurate classification even with novel genomes on samples that include viruses, prokaryotes, fungi and protists.
 
-Scalable performance is demonstrated on real and simulated data to show accurate classification even with novel genomes on samples that include viruses, prokaryotes, fungi and protists.
-
-Each part of LMAT (taxonomic profiling, content summarization and gene annotation) can be run independently.
+LMAT has three related subcomponents (taxonomic profiling, content summarization and gene annotation) that can be run separately.
 
 ### Quick installation
 
-The quick installation will use CMake to ease the process, by downloading, building and installing all the required packages.
+The quick installation procedure will use CMake to ease the process, by downloading, building and installing all the required packages.
 
 #### Required software
 
@@ -34,6 +32,7 @@ There are some wrappers that will direct the installation through CMake for typi
 
 ```
 git clone https://github.com/LivGen/LMAT.git
+cd LMAT
 ./redoall_gnu.sh
 ```
 
@@ -43,16 +42,16 @@ git clone https://github.com/LivGen/LMAT.git
 * Further information about LMAT can be found in the article "[Using populations of human and microbial genomes for organism detection in metagenomes](https://doi.org/10.1101/gr.184879.114)".
 * Please refer to [documentation in the 'doc' subdirectory
   for technical information on LMAT](https://rawgit.com/LivGen/LMAT/master/doc/lmat-doc/index.html).
-
+* [LMAT web site at LLNL](https://computation.llnl.gov/projects/livermore-metagenomics-analysis-toolkit).
+* This is an [example of LMAT run](https://sourceforge.net/p/lmat/wiki/Example%20LMAT%20Run/).
 
 ### Post-processing with Recentrifuge
 
-If you are analyzing more than one sample with LMAT you can easily analyze all of them using [Recentrifuge: Robust comparative analysis and contamination removal for metagenomic data](https://github.com/khyox/recentrifuge).
+If you are analyzing more than one sample with LMAT you can easily visualize and compare them using [Recentrifuge: Robust comparative analysis and contamination removal for metagenomic data](https://github.com/khyox/recentrifuge).
 
-Recentrifuge is especially useful in the case of low biomass metagenomic studies or when a more reliable detection of minority organisms is needed, like in clinical, environmental and forensic analysis. Further details in the [bioRxiv pre-print](https://doi.org/10.1101/190934).
+With a score-oriented approach, Recentrifuge is especially useful in the case of low biomass metagenomic studies or when a more reliable detection of minority organisms is needed, like in clinical, environmental and forensic analysis. Further details are in the [bioRxiv pre-print](https://doi.org/10.1101/190934).
 
-For usage and documentation, please, see [the Recentrifuge wiki](https://github.com/khyox/recentrifuge/wiki).
-
+For usage and documentation, please, see [running Recentrifuge for LMAT](https://github.com/khyox/recentrifuge/wiki/Running-recentrifuge-for-LMAT) in the [Recentrifuge wiki](https://github.com/khyox/recentrifuge/wiki/). 
 ___
 
 ```
