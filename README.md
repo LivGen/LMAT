@@ -15,25 +15,36 @@ The quick installation procedure will use CMake to ease the process, by download
 #### Required software
 
 * CMake3
-* C/C++ compiler with OpenMP support (like gcc, clang, icc)
+* C/C++ compiler with OpenMP support (like gcc, clang, icc, xlc)
 * Recommended: python, for some tools
 * Optional: MPI, for use in building a Reference Database
 
-#### Using the wrappers around CMake
+#### Using redoall to build LMAT easily
 
-There are some wrappers that will direct the installation through CMake for typical compilers (gcc, clang and Intel C/C++ compilers). These wrapers accept a single parameter for the type of build:
-* ``D`` for ``Debug`` (this is the default one)
-* ``R`` for ``Release``
+``redoall`` is a convenient wrapper that will direct the installation through CMake for typical compilers (gcc, clang, Intel C/C++ compilers and IBM XL Compilers for Power9):
+```
+usage: redoall [profile] [compiler]
+```
+
+The 1st optional parameter chooses the build profile of CMake:
+* ``D`` for ``Debug``
+* ``R`` for ``Release`` (this is the current default)
 * ``I`` for release with debug info (``RelWithDebInfo``)
 * ``M`` for release with minimum size (``MinSizeRel``)
 * for just cleaning the parameter is ``clean``
 
-#### Example for gcc
+The 2nd optional parameter selects the compiler family:
+*  ``gnu`` for using GCC
+*  ``intel`` for using Intel compilers
+*  ``clang`` for using clang compilers
+*  ``ibmpwr9`` for compiling in Power 9 with IBM compilers
+
+#### Example for gcc (release profile)
 
 ```
 git clone https://github.com/LivGen/LMAT.git
 cd LMAT
-./redoall_gnu.sh
+./redoall
 ```
 
 ### Details
@@ -52,6 +63,21 @@ If you are analyzing more than one sample with LMAT you can easily visualize and
 With a score-oriented approach, Recentrifuge is especially useful in the case of low biomass metagenomic studies or when a more reliable detection of minority organisms is needed, like in clinical, environmental and forensic analysis. Further details are in the [bioRxiv pre-print](https://doi.org/10.1101/190934).
 
 For usage and documentation, please, see [running Recentrifuge for LMAT](https://github.com/khyox/recentrifuge/wiki/Running-recentrifuge-for-LMAT) in the [Recentrifuge wiki](https://github.com/khyox/recentrifuge/wiki/). 
+
+### LMAT and PERM: tunning the kernel
+
+LMAT uses [PERM](https://computation.llnl.gov/projects/memory-centric-architectures/perm), a ‘C’ library for persistent heap management used with a dynamic-memory allocator, also developed at LLNL. To PERM (so LMAT) to work in the right conditions, some kernel tunning is advisable:
+
+* Turn off periodic flush to file and dirty ratio flush:
+```
+echo 0 > /proc/sys/vm/dirty_writeback_centisecs
+echo 100 > /proc/sys/vm/dirty_background_ratio
+echo 100 > /proc/sys/vm/dirty_ratio
+```
+* Turn off address space randomization:
+```
+echo 0 > /proc/sys/kernel/randomize_va_space 
+```
 ___
 
 ```
@@ -66,7 +92,3 @@ ___
    Livermore  Metagenomics  Analysis  Toolkit  
  ==============================================
 ```
-
-
-
-

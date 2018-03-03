@@ -15,6 +15,14 @@ if(COMPILER_FAMILY STREQUAL "intel")
   set(CMAKE_C_COMPILER icc)
   set(CMAKE_CXX_COMPILER icpc)
   set(CMAKE_Fortran_COMPILER ifort)
+elseif(COMPILER_FAMILY STREQUAL "ibmpwr9")
+  set(IS_IBMPWR9 TRUE)
+  MESSAGE("CMAKE parsing CMakeLists.txt for LMAT by IBM Compilers for Power9...")
+  INCLUDE(CMakeForceCompiler)
+  MESSAGE("Enforcing IBM compilers!")
+  set(CMAKE_C_COMPILER xlc)
+  set(CMAKE_CXX_COMPILER xlc++)
+  set(CMAKE_Fortran_COMPILER xlf)
 elseif(COMPILER_FAMILY STREQUAL "clang")
   set(IS_CLANG TRUE)
   MESSAGE("CMAKE parsing CMakeLists.txt for LMAT by CLANG w/OpenMP Compilers...")
@@ -52,7 +60,7 @@ IF(DEFINED CMAKE_BUILD_TYPE)
 build, options are: None(CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug
 Release RelWithDebInfo MinSizeRel.")
 ELSE()
-   SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build,
+   SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build,
 options are: None(CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release
 RelWithDebInfo MinSizeRel.")
 ENDIF()
@@ -98,12 +106,19 @@ ELSE()
   SET(USE_BOOST 0 CACHE BOOLEAN "Boolean for using Boost library")
 ENDIF()
 
+# If the user specifies -D WITH_PJMALLOC on the command line, take its definition
+# and dump it in the cache along with proper documentation, otherwise set it to True
+IF(DEFINED WITH_PJMALLOC)
+  SET(PJMALLOC ${WITH_PJMALLOC} CACHE BOOLEAN "Boolean for using PJmalloc library")
+ELSE()
+  SET(PJMALLOC 1 CACHE BOOLEAN "Boolean for using PJmalloc library")
+ENDIF()
 
 ##
 ## Project declaration
 ##
 
-project(LMAT VERSION 1.2.4.0 LANGUAGES C CXX)
+project(LMAT VERSION 1.2.4.2018 LANGUAGES C CXX)
 
 #
 # Add the right compiler flags
@@ -115,14 +130,14 @@ project(LMAT VERSION 1.2.4.0 LANGUAGES C CXX)
 #	     -DUSE_SORTED_DB=$(USE_SORTED_DB)
 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -std=c++0x -DIDX_CONFIG=${SDBIDX} -DTID_SIZE=${TAXID_SIZE} -DDBTID_T=${TID_T} -DUSE_SORTED_DB=${USE_SORTED_DB}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -std=c++0x -DIDX_CONFIG=${SDBIDX} -DTID_SIZE=${TAXID_SIZE} -DDBTID_T=${TID_T} -DUSE_SORTED_DB=${USE_SORTED_DB} -DWITH_PJMALLOC=${PJMALLOC}")
 if(USE_BOOST)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DUSE_BOOST=${USE_BOOST}")
 endif()
 
 # General debug/release compiler flags
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -O0 -Wall")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -g -O0 -Wall")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -O0 -Wall")  # -fpermissive")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -g -O0 -Wall")  # -fpermissive")
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -w -Wno-deprecated")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -w -Wno-deprecated")
 
@@ -144,10 +159,24 @@ IF(DEFINED IS_INTEL)
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -g -O3 -traceback -debug parallel")
 ENDIF()
 
+IF(DEFINED IS_IBMPWR9)
+  # Enable host architecture optimizations.
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -qsmp=omp -qarch=pwr9")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -qsmp=omp -qarch=pwr9")
+  set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -qsmp=noopt")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -qsmp=noopt")
+  set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O5")
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O5")
+  set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -g -O5")
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -g -O5")
+  set(CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} -qcompact all")
+  set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL} -qcompact all")
+ENDIF()
+
 # Specific LLVM/clang compiler flags
 if(DEFINED IS_CLANG)
   if(NOT APPLE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem /software/gcc-4.9.3/include/c++/4.9.3 -I/software/gcc-4.9.3/include/c++/4.9.3/x86_64-unknown-linux-gnu")
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem /software/gcc-4.9.3/include/c++/4.9.3 -I/software/gcc-4.9.3/include/c++/4.9.3/x86_64-unknown-linux-gnu")
   endif()
 endif()
 
@@ -182,9 +211,10 @@ ENDIF(OPENMP_FOUND)
 include(ExternalProject)
 ExternalProject_Add(PERM
   PREFIX ${CMAKE_BINARY_DIR}/third-party
-  URL https://computation.llnl.gov/projects/memory-centric-architectures/download/perm-je-0.9.7.tgz
+  GIT_REPOSITORY https://github.com/khyox/perm-je
+  #URL https://computation.llnl.gov/projects/memory-centric-architectures/download/perm-je-0.9.7.tgz
   DOWNLOAD_NO_PROGRESS 1  
-  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=<INSTALL_DIR> CXX=${CMAKE_CXX_COMPILER}
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --with-jemalloc-prefix=je CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} --prefix=<INSTALL_DIR>
   BUILD_COMMAND make -j 16
   BUILD_IN_SOURCE 1
   LOG_BUILD 0
@@ -270,6 +300,8 @@ add_custom_target(_LMAT_1_2_4 ALL
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "=============================================="
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan  "  Livermore  Metagenomics  Analysis  Toolkit  "
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "=============================================="
+                  COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan  "  ========== Release 1.2.4 [2018] ==========  "
+                  COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "=============================================="
                   COMMAND ${CMAKE_COMMAND} -E echo ""
                  )
 
@@ -298,7 +330,7 @@ file(GLOB metag_src src/kmerdb/*.cpp)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY src/kmerdb/lib)
 # Finally, create it!
 add_library(metag STATIC ${metag_src})
-set_target_properties(metag PROPERTIES VERSION 1.2.4 SOVERSION 2)
+set_target_properties(metag PROPERTIES VERSION 1.2.4_2018a SOVERSION 2)
 target_link_libraries(metag jemalloc Threads::Threads -ldl gzstream ZLIB::ZLIB ${Boost_LIBRARIES})
 
 # Add the lib as dependency to the final message 
@@ -321,6 +353,8 @@ ELSEIF(DEFINED IS_GNU)
   SET(CPACK_PACKAGE_VERSION_TWEAK "gnu")
 ELSEIF(DEFINED IS_CLANG)
   SET(CPACK_PACKAGE_VERSION_TWEAK "clang")
+ELSEIF(DEFINED IS_IBMPWR9)
+  SET(CPACK_PACKAGE_VERSION_TWEAK "ibmpwr9")
 ELSE()
   SET(CPACK_PACKAGE_VERSION_TWEAK "unknown")
 ENDIF()
