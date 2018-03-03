@@ -1,1 +1,1 @@
-#define LMAT_VERSION "1.2.4"
+#define LMAT_VERSION "1.2.4_2018a"

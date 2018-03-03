@@ -499,7 +499,7 @@ struct ScoreOptions {
 static void loadLowNumPlasmids(const string& file) {
     ifstream ifs_lst(file.c_str());
     if( !ifs_lst) {
-        cerr<<"Unexpected reading error: "<<file<<endl;
+        cerr<<"Unexpected reading error (plasmids): "<<file<<endl;
         return;
     }
     TID_T pid;
@@ -512,7 +512,7 @@ static void loadLowNumPlasmids(const string& file) {
 static void loadRandHits(const string& file_lst, u_ufmap_t& rand_hits_all, u_usmap_t& rand_class_all) {
     ifstream ifs_lst(file_lst.c_str());
     if( !ifs_lst) {
-        cerr<<"Unexpected reading error: "<<file_lst<<endl;
+        cerr<<"Unexpected reading error (RandHits file list): "<<file_lst<<endl;
         return;
     }
     
@@ -553,15 +553,17 @@ static void loadRandHits(const string& file_lst, u_ufmap_t& rand_hits_all, u_usm
     while(ifs_lst>>read_len>>file) {
         bool first=true;
         const char* path = getenv("LMAT_DIR");
-        if(path ) {
+        if(path) {
             file = string(path) + string("/") + file;
-        }
+        } else {
+	    cerr<<"WARNING! Missing LMAT_DIR environment variable!"<<endl;
+	}
         cout<<"load: "<<read_len<<" "<<file<<endl;
         read_len_vec.push_back(read_len);
         
         ifstream ifs_pre(file.c_str());
         if( !ifs_pre) {
-            cerr<<"Unexpected reading error: "<<file<<endl;
+            cerr<<"Unexpected reading error (RandHits file), skipping... "<<file<<endl;
             continue;
         }
         ifs_pre.close();
@@ -611,7 +613,8 @@ static void loadRandHits(const string& file_lst, u_ufmap_t& rand_hits_all, u_usm
                     cutoff[bin] = max_val;
                     // for small genomes 0 values may be due to to lack of observations
                     // so fill with closest observed bin
-                }  else if( num_obs == 0 && kmer_cnt < 100000) {
+                }  else if( num_obs == 0 && kmer_cnt < 100000)
+ {
                     revisit.push_back(bin);
                 }
                 if( num_obs > 0 ) {
@@ -1303,13 +1306,22 @@ size_t *split_file(int n_threads, ifstream &file)
 
 void usage(char *execname)
 {
-    cout << "LMAT version " << LMAT_VERSION  << "\n";
-    cout << "Usage:\n" ;
-    cout << execname << " -d <input db file (list)> -i <query fasta file> -t <number of threads> -o <output path> [-l <human bias>]\n";
-    cout << "[-v <pct cutoff>]  -c <tax tree file> -k <kmer size> [-z:verbose] [-r:rank table]\n";
-    cout << "[-m <rank/tid-map-file>] [-g <tid-cutoff>] [-w <with-strain-species-map> (affects -m option)]\n";
-    cout << "[-h:turn phiX screening off]\n";
-    
+    cout << "==============================================" << endl;
+    cout << " : : :       ··        ··      ·   ·········· " << endl;
+    cout << " : : :       ···      ···     · ·      ··     " << endl;
+    cout << " : : :       ·· ··  ·· ··    ·· ··     ··     " << endl;
+    cout << " : : ······· ··   ··   ··   ·······    ··     " << endl;
+    cout << " :  ······   ··        ··  ··     ··   ··     " << endl;
+    cout << "   ·····     ··        ·· ··       ··  ··     " << endl;
+    cout << "==============================================" << endl;
+    cout << "  Livermore  Metagenomics  Analysis  Toolkit  " << endl;
+    cout << "==============================================" << endl;
+    cout << endl << "Taxonomic classification module usage:" << endl;
+    cout << execname << " -d <input db file (list)> -i <query fasta file> -t <number of threads>" << endl;
+    cout << "-o <output path> [-l <human bias>] [-v <pct cutoff>]  -c <tax tree file> -k <kmer size>" << endl;
+    cout << "[-y:verbose] [-r:rank table] [-m <rank/tid-map-file>] [-g <tid-cutoff>]" << endl;
+    cout << "[-w <with-strain-species-map> (affects -m option)] [-h:turn phiX screening off]" << endl;
+    cout << "[-V:print version and exit] [-H:print this usage help and exit]" << endl;
 }
 
 
@@ -1336,7 +1348,7 @@ int main(int argc, char* argv[])
     
     
     
-    while ((c = getopt(argc, argv, "u:ahn:j:b:ye:w:pk:c:v:k:i:d:l:t:r:sm:o:x:f:g:z:qV")) != -1) {
+    while ((c = getopt(argc, argv, "u:ahn:j:b:ye:w:pk:c:v:k:i:d:l:t:r:sm:o:x:f:g:z:qVH")) != -1) {
         
         switch(c) {
             case 'h':
@@ -1419,32 +1431,35 @@ int main(int argc, char* argv[])
                 ofbase = optarg;
                 break;
             case 'V':
-                cout << "LMAT version " << LMAT_VERSION  << "\n";
+                cout << "LMAT version " << LMAT_VERSION  << endl;
                 exit(0);
+	    case 'H':
+		usage(argv[0]);
+		exit(0);		
             default:
-                cout << "Unrecognized option: "<<c<<", ignore."<<endl;
+                cerr << "WARNING! Unrecognized option "<<c<<" to ignore."<<endl;
         }
     }
-    if (depth_file == "") cout << "depth_file\n";
-    if (ofbase == "") cout << "ofbase\n";
-    if (n_threads == 0) cout << "n_threads\n";
-    if (kmer_db_fn == "") cout << "kmer_db_fn\n";
-    if (query_fn == "") cout << "query_fn\n";
+    if (depth_file == "") cerr << "ERROR! Missing depth_file" << endl;
+    if (ofbase == "") cerr << "ERROR! Missing ofbase" << endl;
+    if (n_threads == 0) cerr << "ERROR! Missing n_threads" << endl;
+    if (kmer_db_fn == "") cerr << "ERROR! Missing kmer_db_fn" << endl;
+    if (query_fn == "") cerr << "ERROR! Missing query_fn" << endl;
     
     if (depth_file == "" ||  ofbase == "" || n_threads == 0 || kmer_db_fn == "" || query_fn == "")  {
-        cout<<ofbase<<" "<<n_threads<<" "<<kmer_db_fn<<" "<<query_fn<<" "<<depth_file<<endl;
+        cerr << "Params: " << ofbase<<" "<<n_threads<<" "<<kmer_db_fn<<" "<<query_fn<<" "<<depth_file<<endl;
         usage(argv[0]);
         return -1;
-        
     }
     if (!restore && k_size == -1)  {
-        cout << "missing kmer size!\n";
+        cerr << "ERROR! Missing kmer size!" << endl;
         usage(argv[0]);
         return -1;
-        
     }
-    
-    cout << "Start kmer DB load\n";
+
+    cout << "=== LMAT === read_label === ver. " << LMAT_VERSION  << " ===" << endl;
+
+    cout << "Start kmer DB load..." << endl;
     INDEXDB<DBTID_T> *taxtable;
     
     
@@ -1454,7 +1469,7 @@ int main(int argc, char* argv[])
     
     taxtable = ret.first;
     k_size = taxtable->get_kmer_length();
-    cout << "k size:  " << k_size  <<   endl ;
+    cout << "BOOST: k-mer size: " << k_size  <<   endl ;
     taxtable->conv_ptrs();
 #else
     
@@ -1471,8 +1486,7 @@ int main(int argc, char* argv[])
         if (k_size < 1)
             k_size = taxtable->get_kmer_length();
         
-        cout << "num kmers: " << taxtable->size() << " - " << k_size  <<   endl ;
-        
+        cout << "Mapping with PERM/pjmalloc. Num of k-mers: " << taxtable->size() << " of size " << k_size  <<   endl ;
         
     } else
         
@@ -1480,30 +1494,24 @@ int main(int argc, char* argv[])
         
     {
         
-        
 #if (USE_SORTED_DB == 0)
         taxtable = new INDEXDB<DBTID_T>;
         
         ifstream qifs(kmer_db_fn.c_str());
         if( !qifs ) {
             cerr<<"Unable to open: "<<kmer_db_fn<<endl;
-            return -1;
-            
+            return -1;       
             
         }
-        
-        
-        
         
         string fname;
         
         while(qifs>>fname) {
-            cout<<"register file: "<<fname<<endl;
+            cout<<"Not using sorted DB. Register file: "<<fname<<endl;
             taxtable->registerFile(fname.c_str());
         }
         taxtable->ingest();
 #endif
-        
         
     }
     
@@ -1517,10 +1525,9 @@ int main(int argc, char* argv[])
         loadRandHits(rand_hits_file,sopt._rand_hits,sopt._rand_class);
     }
     if( k_size <= 0 ) {
-        cerr<<"Unable to read database, k_size="<<k_size<<endl;
+        cerr<<"ERROR! Unable to read database, k-mer size="<<k_size<<endl;
         return -1;
     }
-    
     
     
     string line;
@@ -1558,17 +1565,15 @@ int main(int argc, char* argv[])
             gRank_table.insert(make_pair(tid,rank));
         }
     }
+      
     
-    
-    
-    
-    cout<<"Read taxonomy tree: "<<tax_tree_fn<<endl;
+    cout<<"Reading taxonomy tree "<<tax_tree_fn<<endl;
     TaxTree<TID_T> tax_tree(tax_tree_fn.c_str());
     
-    cout<<"Read taxonomy depth: "<<depth_file<<endl;
+    cout<<"Reading taxonomy depth "<<depth_file<<endl;
     ifstream ifs1(depth_file.c_str());
     if(!ifs1) {
-        cerr<<"unable to open: "<<depth_file<<endl;
+        cerr<<"ERROR! Unable to open: "<<depth_file<<endl;
         return -1;
     }
     TID_T taxid,depth;
@@ -1578,24 +1583,24 @@ int main(int argc, char* argv[])
     
     
     if (id_bit_conv_fn.length() > 0) {
-        cout << "Loading map file,\n";
+        cout << "Loading map file " << id_bit_conv_fn << "... ";
         FILE * tfp = fopen(id_bit_conv_fn.c_str(), "r");
         if( !tfp ) {
-            cout<<"Unable to read 16-bit map file:"<<id_bit_conv_fn<<endl;
+            cerr << "ERROR! Unable to read 16-bit map file:" << id_bit_conv_fn << endl;
             return -1;
         }
         
         uint32_t src;
         uint16_t dest;
         
-        while (fscanf(tfp,"%d%hd", &src, &dest) > 0) {
-            
+        while (fscanf(tfp,"%d%hd", &src, &dest) > 0) {            
             conv_map[dest] = src;
         }
+
         fclose(tfp);
+	cout << "OK!" << endl;
     }
-    
-    
+       
     
     StopWatch clock;
     clock.start();
@@ -1603,7 +1608,7 @@ int main(int argc, char* argv[])
     vector<map<TID_T,int> > track_matchall(n_threads);
     vector<map<nomatch_t,int> > track_nomatchall(n_threads);
     
-    size_t read_count_in =0;
+    size_t read_count_in = 0;
     size_t read_count_out = 0;
     
     
@@ -1618,18 +1623,16 @@ int main(int argc, char* argv[])
         tmpstream.open(query_fn.c_str());
         
         if(!tmpstream) {
-            cerr<<"did not open for reading: "<<query_fn<<endl;
-            
+            cerr<<"ERROR! Did not open for reading: "<<query_fn<<endl;
             exit(-1);
-            
         }
+
         ifs.rdbuf(tmpstream.rdbuf());
     }
     
+    cout << "Classifing reads in parallel with " << n_threads << " processes in .out files..." << endl;
     
-    
-    
-    
+
     
 #pragma omp parallel shared(k_size, query_fn, ofbase, taxtable, tax_tree, sopt,  prn_read,track_matchall,track_nomatchall,track_tscoreall,min_score,min_kmer, in_finished, read_count_in, read_count_out, min_fnd_kmer, ifs)  private(finished, ofs, ofname, line, read_buff, hdr_buff, save_hdr)
     {
@@ -1701,7 +1704,7 @@ int main(int argc, char* argv[])
                     
                     if (in_finished) {
                         
-                        cout << read_count_in << " reads in\n";
+                        cout << "Total reads loaded: " << read_count_in << endl;
                         break;
                         
                     }
@@ -1750,10 +1753,10 @@ int main(int argc, char* argv[])
                 finished = true;
         }
         ofs.close();
-    }
+    }  // End of OMP parallel region
     
-    
-    
+    cout << "Finished classifing reads, doing final steps sequentially..." << endl;    
+
     map<TID_T,int>  merge_count;
     map<TID_T,float>  merge_score;
     map<nomatch_t,int>  nomatch_merge_count;
@@ -1834,9 +1837,10 @@ int main(int argc, char* argv[])
     ostrm<<ofbase<<"."<<min_score<<"."<<min_kmer<<".fastsummary";
     ofstream sum_ofs(ostrm.str().c_str());
     if( !sum_ofs ) {
-        cout<<"Could not open for writing "<<ostrm.str()<<endl;
+        cerr<<"ERROR! Could not open for writing "<<ostrm.str()<<endl;
         return -1;
     }
+    cout << "Writing FastSummary file in " << ostrm.str() << endl;
     sort(sort_val.begin(),sort_val.end(),SimpleCmp());
     for(unsigned i= 0; i < sort_val.size(); ++i) {
         const TID_T tid = sort_val[i].first;
@@ -1850,9 +1854,10 @@ int main(int argc, char* argv[])
     nomostrm<<ofbase<<"."<<min_score<<"."<<min_kmer<<".nomatchsum";
     ofstream nom_ofs(nomostrm.str().c_str());
     if( !nom_ofs ) {
-        cout<<"Could not open for writing "<<nomostrm.str()<<endl;
+        cerr << "ERROR! Could not open for writing " << nomostrm.str() << endl;
         return -1;
     }
+    cout << "Writing NoMatchSum file in " << nomostrm.str() << endl;
     map<nomatch_t,int>::const_iterator it3 = nomatch_merge_count.begin();
     map<nomatch_t,int>::const_iterator is3 = nomatch_merge_count.end();
     for(; it3 != is3; ++it3) {
@@ -1860,7 +1865,7 @@ int main(int argc, char* argv[])
         const int count = (*it3).second;
         nom_ofs<<id<<"\t"<<count<<endl;
     }
-    cout << "query time: " << clock.stop() << endl;
-    
+    double elaptime = clock.stop();
+    cout << "DONE! Total query time: " << elaptime << " sec = " << elaptime/60 << " min"<< endl;
     return 0; 
 }

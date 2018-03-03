@@ -1,6 +1,6 @@
 # Livermore  Metagenomics  Analysis  Toolkit
 **Taxonomic classification, content summarization
- and gene identification, an all-in-1 metagenomic analysis toolkit**
+ and gene identification: all-in-1 metagenomic analysis toolkit**
 ___
 ### Overview
 
@@ -21,7 +21,7 @@ The quick installation procedure will use CMake to ease the process, by download
 
 #### Using redoall to build LMAT easily
 
-``redoall`` is a convenient wrapper that will direct the installation through CMake for typical compilers (gcc, clang, Intel C/C++ compilers and IBM XL Compilers for Power9):
+``redoall`` is a convenient wrapper that will direct the installation through CMake for typical compilers (GNU gcc, clang/LLVM, Intel C/C++ compilers and IBM XL compilers for Power9):
 ```
 usage: redoall [profile] [compiler]
 ```
@@ -39,13 +39,22 @@ The 2nd optional parameter selects the compiler family:
 *  ``clang`` for using clang compilers
 *  ``ibmpwr9`` for compiling in Power 9 with IBM compilers
 
-#### Example for gcc (release profile)
+#### Example for GNU gcc (release profile)
 
 ```
 git clone https://github.com/LivGen/LMAT.git
 cd LMAT
 ./redoall
 ```
+
+#### Example for Intel compilers (debug profile)
+
+```
+git clone https://github.com/LivGen/LMAT.git
+cd LMAT
+./redoall D intel
+```
+
 
 ### Details
 
