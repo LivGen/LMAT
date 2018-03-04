@@ -73,9 +73,9 @@ With a score-oriented approach, Recentrifuge is especially useful in the case of
 
 For usage and documentation, please, see [running Recentrifuge for LMAT](https://github.com/khyox/recentrifuge/wiki/Running-recentrifuge-for-LMAT) in the [Recentrifuge wiki](https://github.com/khyox/recentrifuge/wiki/). 
 
-### LMAT and PERM: tunning the kernel
+### LMAT and PERM: tuning the kernel
 
-LMAT uses [PERM](https://computation.llnl.gov/projects/memory-centric-architectures/perm), a ‘C’ library for persistent heap management used with a dynamic-memory allocator, also developed at LLNL. To PERM (so LMAT) to work in the right conditions, some kernel tunning is advisable:
+LMAT uses [PERM](https://computation.llnl.gov/projects/memory-centric-architectures/perm), a ‘C’ library for persistent heap management used with a dynamic-memory allocator, also developed at LLNL. For PERM (so LMAT) to work in the right conditions, some kernel tuning is advisable:
 
 * Turn off periodic flush to file and dirty ratio flush:
 ```
