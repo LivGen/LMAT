@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
     }
     cout << endl;
     
-    char c = '\0';
+    signed char c = '\0';
     bool prn_help = false;
     string kmer_db_fn, outfile;
     string taxtree_fn, ranks_fn;

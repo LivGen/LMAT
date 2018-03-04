@@ -377,7 +377,7 @@ void usage(char *execname)
 
 int main(int argc, char* argv[])
 {
-    char c = '\0';
+    signed char c = '\0';
     int n_threads = 0, k_size = -1;
     bool ascii = false;
     float min_score = 0.0, min_tax_score = 0.0;

@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     
     int count = 0;
     const string opt_string="i:k:h o:p:l:q:f:m:V";
-    char c;
+    signed char c;
     while ((c = getopt(argc, argv, opt_string.c_str())) != -1) {
         switch (c) {
             case 'm' :

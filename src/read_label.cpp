@@ -1327,7 +1327,7 @@ void usage(char *execname)
 
 int main(int argc, char* argv[])
 {
-    char c = '\0';
+    signed char c = '\0';
     int k_size=-1;
     int n_threads = 0;
     

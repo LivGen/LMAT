@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
     const string opt_string="i:o:h f:q:V";
     int which;
     int count = 0;
-    char c;
+    signed char c;
     int quit_early = 0;
     while ((c = getopt(argc, argv, opt_string.c_str())) != -1) {
         switch (c) {

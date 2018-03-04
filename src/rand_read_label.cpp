@@ -410,7 +410,7 @@ void usage(char *execname)
 int main(int argc, char* argv[])
 {
     std::srand ( unsigned ( std::time(0) ) );
-    char c = '\0';
+    signed char c = '\0';
     int k_size=-1;
     unsigned n_threads = 0;
     

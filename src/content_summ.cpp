@@ -234,7 +234,7 @@ struct SaveRes {
 
 int main(int argc, char* argv[])
 {
-    char c = '\0';
+    signed char c = '\0';
     
     float threshold = 0.0;
     string sep_plas_file,query_fn_lst,lmat_sum,kmer_db_fn, query_fn, ofname, ofbase, tax_tree_fn, depth_file, rank_table_file, cont_genomes_lst;
