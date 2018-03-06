@@ -21,7 +21,7 @@ The quick installation procedure will use CMake to ease the process, by download
 
 #### Using redoall to build LMAT easily
 
-``redoall`` is a convenient wrapper that will direct the installation through CMake for typical compilers (GNU gcc, clang/LLVM, Intel C/C++ compilers and IBM XL compilers for Power9):
+``redoall`` is a convenient wrapper that will direct the installation through CMake for typical compilers (GNU gcc, clang/LLVM, Intel C/C++ compilers and IBM XL compilers for Power 8 and 9):
 ```
 usage: redoall [profile] [compiler]
 ```
@@ -38,6 +38,7 @@ The 2nd optional parameter selects the compiler family:
 *  ``intel`` for using Intel compilers
 *  ``clang`` for using clang compilers
 *  ``ibmpwr9`` for compiling in Power 9 with IBM compilers
+*  ``ibmpwr8`` for compiling in Power 8 with IBM compilers
 
 #### Example for GNU gcc (release profile)
 
