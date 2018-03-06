@@ -22,11 +22,12 @@ echo "  gnu for using GCC"
 echo "  intel for using Intel compilers"
 echo "  clang for using clang compilers"
 echo "  ibmpwr9 for compiling in Power 9 with IBM compilers"
+echo "  ibmpwr8 for compiling in Power 8 with IBM compilers"
 echo "Default compiler : $defaultcomp" 
 exit 1
 }
 
-if [ "$#" -eq 2 ] && ([ $2 = "gnu" ] || [ $2 = "intel" ] || [ $2 = "clang" ] || [ $2 = "ibmpwr9" ]); then
+if [ "$#" -eq 2 ] && ([ $2 = "gnu" ] || [ $2 = "intel" ] || [ $2 = "clang" ] || [ $2 = "ibmpwr9" ] || [ $2 = "ibmpwr8" ]); then
     echo "Preparing environment for $2 compilers..."
     comp="-D COMPILER_FAMILY=$2"
 elif [ "$#" -eq 2 ]; then
