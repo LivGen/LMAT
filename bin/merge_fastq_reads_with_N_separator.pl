@@ -1,5 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 
+use warnings;
 use FileHandle;
 # Example:  Designed to merge two paired fastq files
 # merge_sra_reads_with_N_separator.pl  $i.lib1.fastq $i.lib2.fastq $i.mergeReadN.fasta

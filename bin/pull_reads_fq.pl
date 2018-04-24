@@ -1,4 +1,6 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+
+use warnings;
 
 ## Pull FASTQ reads for the headers specified in $headers
 

@@ -1,4 +1,5 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
+use warnings;
 
 # LMAT2multi-fastsummaryTable.pl  -in flst  -out outfile  -min_reads 1 -min_frac 0.00 -min_score 0.7 
 
