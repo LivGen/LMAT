@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 # Python2 compatibility
 from __future__ import print_function, unicode_literals
