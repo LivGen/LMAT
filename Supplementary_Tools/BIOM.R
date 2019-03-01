@@ -91,7 +91,7 @@ create_TAX <- function(x, coltax, colSpName) {
 create_CONT <- function() {
   C_lst <-
     read.table(
-      "/usr/gapps/kpath/bin/CONT_TAXID.ls", head = F,stringsAsFactors = F
+      "./CONT_TAXID.ls", head = F,stringsAsFactors = F
     )
   OTU_Cont <- OTU_Reads[which(rownames(OTU_Reads) %in% C_lst$V1),]
   TAX_Cont <- Tax_Full[which(rownames(Tax_Full) %in% C_lst$V1),]
