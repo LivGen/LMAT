@@ -19,8 +19,7 @@ The BIOM tables are the following: OTU_Reads, OTU_RA, Tax_Full
 Each column would represent a sample and each row a taxonomy. The OTU_RA works the same but elements are relative abundance of each taxonomical hit per sample. The Tax_Full matrix provides the lineage for each taxid, which is useful to represent the sample per family, genus, etc; depending on whats specified in the phyloseq method.
 
 
-### Run Settings
-Input:
+*Input:
 - **concatenated.file** = is all of the *.species* summary outputs per sample of LMAT concatenated together in a single file such that each line has the sample where they belong to.
 
 - **Tax_Ref**= this is a mapping file to obtain the lineage information for a specific taxid based on the reference genomes that are stored in the current LMAT database. [This file is too big to upload, but the script used create it will be made public]
@@ -33,7 +32,7 @@ cat file_lst|perl g.pl >> concatenated.file
 
 RScript BIOM.R concatenated.file
  ```
-Output: 
+*Output: 
 All the files are stored in a RData environment as: concatenated.file.RData
 
 Some examples can be seen in the **Example** folder
