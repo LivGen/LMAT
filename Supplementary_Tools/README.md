@@ -12,7 +12,7 @@ and the package can be downloaded here:
 [Download](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 
 ### What it does?
-The BIOM tables are the following: OTU_Reads, OTU_RA, Tax_Full
+The BIOM tables are the following: OTU_Reads, OTU_RA and Tax_Full.
 
 - Lets say that we have a batch of 8 samples, each sampled is processed through LMAT for metagenomic classification. Each sample has n1,...,n8 taxonomical hits, where all <a href="https://www.codecogs.com/eqnedit.php?latex=n_j" target="_blank"><img src="https://latex.codecogs.com/png.latex?n_j" title="n_j" /></a> may not be equal. Then to create an even matrix among all 8 samples the dimension of the OTU_READS=(<a href="https://www.codecogs.com/eqnedit.php?latex=max(n_j)" target="_blank"><img src="https://latex.codecogs.com/png.latex?max(n_j)" title="max(n_j)" /></a>,8). For each taxonomic id not found common in other samples then the reads for that are input as 0.
 
