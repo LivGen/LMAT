@@ -27,4 +27,7 @@ Input:
 #### Command Line 
 RScript BIOM.R $concatenated.file 
 
-Output: All the files are stored in a RData environment as: $concatenated.file.RData
+Output: 
+All the files are stored in a RData environment as: $concatenated.file.RData
+
+Some examples can be seen in the **Example** folder
