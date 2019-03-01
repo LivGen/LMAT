@@ -22,7 +22,7 @@ Each column would represent a sample and each row a taxonomy. The OTU_RA works t
 Input:
 - **concatenated.file** = is all of the *.species* summary outputs per sample of LMAT concatenated together in a single file such that each line has the sample where they belong to.
 
-- **Tax_Ref**= this is a mapping file to obtain the lineage information for a specific taxid based on the reference genomes that are stored in the current LMAT database. [This file is too big to upload, but the script create it will be made public]
+- **Tax_Ref**= this is a mapping file to obtain the lineage information for a specific taxid based on the reference genomes that are stored in the current LMAT database. [This file is too big to upload, but the script used create it will be made public]
 
 #### Command Line 
 RScript BIOM.R $concatenated.file 
