@@ -11,19 +11,15 @@ and the package can be downloaded here:
 
 https://bioconductor.org/packages/release/bioc/html/phyloseq.html
 
-# What it does?
+### What it does?
 The BIOM tables are the following: OTU_Reads, OTU_RA, Tax_Full
--- Lets say that we have a batch of 8 samples, each sampled is processed through LMAT for metagenomic classification. 
-Each sample has n1,...,n8 taxonomical hits, where all $n_{j}$ may not be equal. 
-Then to create an even matrix among all 8 samples the dimension of the OTU_READS=(max{$n_j},8). 
-For each taxonomy in $n_{i}$ not in $n_{j}$ then the Reads are input as 0.
+-- Lets say that we have a batch of 8 samples, each sampled is processed through LMAT for metagenomic classification. Each sample has n1,...,n8 taxonomical hits, where all $n_{j}$ may not be equal. Then to create an even matrix among all 8 samples the dimension of the OTU_READS=(max{$n_j},8). For each taxonomy in $n_{i}$ not in $n_{j}$ then the Reads are input as 0.
 
 
 
-## Run Settings
+### Run Settings
 
-If you wish to manually run it:
-git clone Supplementary_Tools/
+
 
 RScript BIOM.R concatenated.file 
 
