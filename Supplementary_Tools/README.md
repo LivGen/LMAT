@@ -13,7 +13,7 @@ and the package can be downloaded here:
 
 ### What it does?
 The BIOM tables are the following: OTU_Reads, OTU_RA, Tax_Full
--- Lets say that we have a batch of 8 samples, each sampled is processed through LMAT for metagenomic classification. Each sample has n1,...,n8 taxonomical hits, where all $$n_{j}$$ may not be equal. Then to create an even matrix among all 8 samples the dimension of the OTU_READS=($ max{$n_j} $,8). For each taxonomy in $$n_{i}$$ not in $ n_{j} $ then the Reads are input as 0.
+-- Lets say that we have a batch of 8 samples, each sampled is processed through LMAT for metagenomic classification. Each sample has n1,...,n8 taxonomical hits, where all <a href="https://www.codecogs.com/eqnedit.php?latex=n_j" target="_blank"><img src="https://latex.codecogs.com/png.latex?n_j" title="n_j" /></a> may not be equal. Then to create an even matrix among all 8 samples the dimension of the OTU_READS=(max<a href="https://www.codecogs.com/eqnedit.php?latex=n_j" target="_blank"><img src="https://latex.codecogs.com/png.latex?n_j" title="n_j" /></a>,8). For each taxonomy in <a href="https://www.codecogs.com/eqnedit.php?latex=n_j&space;\neq&space;n_k" target="_blank"><img src="https://latex.codecogs.com/png.latex?n_j&space;\neq&space;n_k" title="n_j \neq n_k" /></a> then the Reads are input as 0.
 
 Each column would represent a sample and each row a taxonomy. The OTU_RA works the same but elements are relative abundance of each taxonomical hit per sample. The Tax_Full matrix provides the lineage for each taxid, which is useful to represent the sample per family, genus, etc; depending on whats specified in the phyloseq method.
 
