@@ -25,12 +25,11 @@ Input:
 - **Tax_Ref**= this is a mapping file to obtain the lineage information for a specific taxid based on the reference genomes that are stored in the current LMAT database. [This file is too big to upload, but the script used create it will be made public]
 
 ### Command Line
-
+ ` ` `
 ls -1 \*.species > file_lst
-\\
 cat file_lst|perl g.pl >> concatenated.file
 RScript BIOM.R concatenated.file 
-
+ ` ` `
 Output: 
 All the files are stored in a RData environment as: concatenated.file.RData
 
