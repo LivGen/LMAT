@@ -1,0 +1,3 @@
+## BIOM.R
+
+This script converts LMAT output in a BIOM* format that is used in packages such as phyloseq [! https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217]
