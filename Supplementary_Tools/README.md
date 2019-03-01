@@ -27,10 +27,13 @@ Each column would represent a sample and each row a taxonomical identification l
 ### Command Line
  ```
  #After having the LMAT results for your input fastas
+ 
 ls -1 \*.species > file_lst
 
+#Merge the files with column showing proceeding filename
 cat file_lst|perl g.pl >> concatenated.file
 
+#Create BIOM tables
 RScript BIOM.R concatenated.file
  ```
 *Output:*
