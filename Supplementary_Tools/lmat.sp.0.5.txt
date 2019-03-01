@@ -1,0 +1,195 @@
+zs3-1_S31	2.3158	1815.57	784	9606	Homo sapiens
+zs3-1_S31	0.6091	766.2437	1258	11269	Marburg marburgvirus	716.795	1167	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs3-1_S31	0.6540	494.422	756	186540	Sudan ebolavirus	247.084	395	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs3-1_S31	0.7248	154.38274	213	186538	Zaire ebolavirus	151.483	210	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs3-1_S31	0.6688	135.107	202	565995	Bundibugyo ebolavirus
+zs3-1_S31	0.5640	15.2272	27	186541	Tai Forest ebolavirus
+zs3-1_S31	0.7288	5.83066	8	32630	synthetic construct
+zs3-1_S31	0.5455	0.545534	1	5791	Physarum polycephalum
+sntc5_S48	2.2234	1193.98	537	9606	Homo sapiens
+sntc5_S48	0.6701	1014.461	1514	186540	Sudan ebolavirus	389.839	623	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc5_S48	0.6029	765.0427	1269	11269	Marburg marburgvirus	717.73	1181	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc5_S48	0.6225	167.458	269	186538	Zaire ebolavirus	167.458	269	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc5_S48	0.7331	142.961	195	565995	Bundibugyo ebolavirus
+sntc5_S48	0.6106	40.9087	67	186541	Tai Forest ebolavirus
+sntc5_S48	0.7731	10.8236	14	32630	synthetic construct
+sntc5_S48	0.5094	0.509371	1	80884	Colletotrichum higginsianum	0.509371	1	759273	no rank,Colletotrichum higginsianum IMI 349063
+zs3-2_S32	2.2607	2758.09	1220	9606	Homo sapiens
+zs3-2_S32	0.6202	964.4169	1555	11269	Marburg marburgvirus	890.856	1425	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs3-2_S32	0.6491	796.415	1227	186540	Sudan ebolavirus	321.0	525	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs3-2_S32	0.6595	228.845	347	565995	Bundibugyo ebolavirus
+zs3-2_S32	0.7635	147.3561	193	186538	Zaire ebolavirus	144.677	190	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs3-2_S32	0.5990	49.7188	83	186541	Tai Forest ebolavirus
+zs3-2_S32	0.7618	6.09428	8	32630	synthetic construct
+sntc3_S68	0.6628	1320.201	1992	186540	Sudan ebolavirus	516.135	831	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc3_S68	0.6066	1288.9276	2125	11269	Marburg marburgvirus	1206.9	1977	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc3_S68	1.5025	465.78	310	9606	Homo sapiens
+sntc3_S68	0.7993	353.27796	442	186538	Zaire ebolavirus	351.316	439	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc3_S68	0.6910	234.927	340	565995	Bundibugyo ebolavirus
+sntc3_S68	0.5835	36.7636	63	186541	Tai Forest ebolavirus
+sntc3_S68	0.7247	21.0176	29	32630	synthetic construct
+sntc3_S68	1.0815	1.0815	1	1202447	Symbiodinium minutum	1.0815	1	1280413	no rank,Symbiodinium minutum Mf 1.05b.01
+sntc3_S68	0.5132	0.513223	1	80884	Colletotrichum higginsianum	0.513223	1	759273	no rank,Colletotrichum higginsianum IMI 349063
+zs3-3_S33	2.2270	1705.91	766	9606	Homo sapiens
+zs3-3_S33	0.5955	720.5954	1210	11269	Marburg marburgvirus	681.519	1138	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs3-3_S33	0.6417	557.026	868	186540	Sudan ebolavirus	254.805	414	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs3-3_S33	0.7097	183.81017	259	186538	Zaire ebolavirus	181.466	256	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs3-3_S33	0.6693	134.536	201	565995	Bundibugyo ebolavirus
+zs3-3_S33	0.6234	16.8322	27	186541	Tai Forest ebolavirus
+zs3-3_S33	0.6882	4.12913	6	32630	synthetic construct
+zs3-3_S33	2.6411	2.64112	1	358	Agrobacterium tumefaciens	2.64112	1	1050720	no rank,Agrobacterium tumefaciens F2
+zs3-3_S33	0.7604	0.760351	1	5791	Physarum polycephalum
+zs3-3_S33	0.6422	0.642197	1	80884	Colletotrichum higginsianum	0.642197	1	759273	no rank,Colletotrichum higginsianum IMI 349063
+sntc1_S47	0.6112	956.5	1565	11269	Marburg marburgvirus	896.693	1457	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc1_S47	1.8829	581.827	309	9606	Homo sapiens
+sntc1_S47	0.6299	527.822	838	186540	Sudan ebolavirus	421.331	665	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc1_S47	0.6994	252.469	361	565995	Bundibugyo ebolavirus
+sntc1_S47	0.6667	177.33	266	186538	Zaire ebolavirus	177.33	266	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc1_S47	0.5799	20.2961	35	186541	Tai Forest ebolavirus
+sntc1_S47	0.7202	9.36319	13	32630	synthetic construct
+sntc8_S79	0.6125	883.8917	1443	11269	Marburg marburgvirus	826.83	1338	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc8_S79	1.7308	614.429	355	9606	Homo sapiens
+sntc8_S79	0.6313	475.348	753	186540	Sudan ebolavirus	336.776	539	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc8_S79	1.0563	387.653	367	565995	Bundibugyo ebolavirus
+sntc8_S79	0.8045	205.148	255	186538	Zaire ebolavirus	205.148	255	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc8_S79	0.5767	36.3323	63	186541	Tai Forest ebolavirus
+sntc8_S79	0.7133	7.13326	10	32630	synthetic construct
+zptc1_S10	2.3115	33974.10108	14698	186538	Zaire ebolavirus	33971.0	14694	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zptc1_S10	1.5181	3025.53	1993	9606	Homo sapiens
+zptc1_S10	0.6244	405.23735	649	11269	Marburg marburgvirus	383.092	610	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zptc1_S10	0.6394	400.917	627	186540	Sudan ebolavirus	217.914	354	1216927	no rank,Sudan ebolavirus - Nakisamata
+zptc1_S10	0.8107	185.654	229	565995	Bundibugyo ebolavirus
+zptc1_S10	0.6209	68.2952	110	186541	Tai Forest ebolavirus
+zptc1_S10	0.7506	12.0101	16	32630	synthetic construct
+sntc7_S69	2.2283	1319.16	592	9606	Homo sapiens
+sntc7_S69	0.6648	694.092	1044	186540	Sudan ebolavirus	260.679	428	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc7_S69	0.5957	673.7246	1131	11269	Marburg marburgvirus	629.384	1049	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc7_S69	0.8444	243.17297	288	186538	Zaire ebolavirus	241.031	286	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc7_S69	0.7083	188.407	266	565995	Bundibugyo ebolavirus
+sntc7_S69	0.5868	25.8187	44	186541	Tai Forest ebolavirus
+sntc7_S69	0.6822	4.77537	7	32630	synthetic construct
+zs6-1_S1	2.1406	51495.7209	24057	186538	Zaire ebolavirus	51476.6	24036	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs6-1_S1	1.5116	5219.6	3453	9606	Homo sapiens
+zs6-1_S1	0.5955	1107.0853	1859	11269	Marburg marburgvirus	1032.11	1720	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs6-1_S1	0.6203	764.2599	1232	186540	Sudan ebolavirus	694.132	1116	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs6-1_S1	0.7587	210.91	278	565995	Bundibugyo ebolavirus
+zs6-1_S1	0.5873	28.1901	48	186541	Tai Forest ebolavirus
+zs6-1_S1	0.7293	13.8565	19	32630	synthetic construct
+zs6-1_S1	0.8535	0.853506	1	80869	Acidovorax citrulli	0.853506	1	1154764	no rank,Acidovorax citrulli ZJU1106
+zs5-3_S13	2.2110	4638.77063	2098	186538	Zaire ebolavirus	4635.75	2094	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs5-3_S13	0.5975	915.3191	1532	11269	Marburg marburgvirus	846.769	1405	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs5-3_S13	1.7935	835.792	466	9606	Homo sapiens
+zs5-3_S13	0.6257	477.3987	763	186540	Sudan ebolavirus	397.786	633	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs5-3_S13	0.9932	305.92	308	565995	Bundibugyo ebolavirus
+zs5-3_S13	0.6098	15.8539	26	186541	Tai Forest ebolavirus
+zs5-3_S13	0.7009	5.60717	8	32630	synthetic construct
+zs2-1_S41	2.0779	1267.53	610	9606	Homo sapiens
+zs2-1_S41	0.6106	622.1627	1019	11269	Marburg marburgvirus	576.946	937	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs2-1_S41	0.6421	357.012	556	186540	Sudan ebolavirus	192.992	317	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs2-1_S41	1.2874	292.22849	227	186538	Zaire ebolavirus	290.659	225	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs2-1_S41	0.6489	117.459	181	565995	Bundibugyo ebolavirus
+zs2-1_S41	0.5973	43.0029	72	186541	Tai Forest ebolavirus
+zs2-1_S41	0.8377	11.7273	14	32630	synthetic construct
+zs2-1_S41	1.0605	1.06046	1	5791	Physarum polycephalum
+zs5-2_S12	2.2935	19687.07219	8584	186538	Zaire ebolavirus	19677.7	8573	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs5-2_S12	1.8593	1849.99	995	9606	Homo sapiens
+zs5-2_S12	0.6078	1244.8473	2048	11269	Marburg marburgvirus	1145.53	1868	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs5-2_S12	0.6163	481.9514	782	186540	Sudan ebolavirus	427.786	690	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs5-2_S12	0.8026	329.881	411	565995	Bundibugyo ebolavirus
+zs5-2_S12	0.5899	60.7615	103	186541	Tai Forest ebolavirus
+zs5-2_S12	0.7228	13.0106	18	32630	synthetic construct
+zs5-2_S12	1.3597	1.35965	1	5791	Physarum polycephalum
+zs2-2_S42	0.6115	872.544	1427	11269	Marburg marburgvirus	813.773	1321	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs2-2_S42	1.7193	778.837	453	9606	Homo sapiens
+zs2-2_S42	0.6226	417.732	671	186540	Sudan ebolavirus	354.12	565	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs2-2_S42	1.1890	365.027965	307	186538	Zaire ebolavirus	364.215	306	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs2-2_S42	0.6465	181.031	280	565995	Bundibugyo ebolavirus
+zs2-2_S42	0.6191	49.5272	80	186541	Tai Forest ebolavirus
+zs2-2_S42	0.7783	17.1229	22	32630	synthetic construct
+zs2-2_S42	0.7396	0.739631	1	5791	Physarum polycephalum
+zs2-2_S42	0.5091	0.509094	1	80884	Colletotrichum higginsianum	0.509094	1	759273	no rank,Colletotrichum higginsianum IMI 349063
+sntc4_S78	0.5969	1009.3343	1691	11269	Marburg marburgvirus	948.601	1578	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc4_S78	0.6486	740.729	1142	186540	Sudan ebolavirus	430.921	682	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc4_S78	1.6012	513.975	321	9606	Homo sapiens
+sntc4_S78	0.9069	323.754	357	565995	Bundibugyo ebolavirus
+sntc4_S78	0.7394	219.607	297	186538	Zaire ebolavirus	219.607	297	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc4_S78	0.6078	47.4115	78	186541	Tai Forest ebolavirus
+sntc4_S78	0.6660	6.66017	10	32630	synthetic construct
+sntc4_S78	2.4741	2.47415	1	1415630	Pseudomonas sp. TKP
+zs5-1_S11	2.2602	9782.23564	4328	186538	Zaire ebolavirus	9779.24	4324	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs5-1_S11	1.9451	3141.36	1615	9606	Homo sapiens
+zs5-1_S11	0.6075	913.0735	1503	11269	Marburg marburgvirus	862.318	1410	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs5-1_S11	0.6110	438.7224	718	186540	Sudan ebolavirus	361.837	590	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs5-1_S11	0.8019	236.559	295	565995	Bundibugyo ebolavirus
+zs5-1_S11	0.5894	23.577	40	186541	Tai Forest ebolavirus
+zs5-1_S11	0.7293	4.37598	6	32630	synthetic construct
+sntc2_S58	1.5953	1786.75	1120	9606	Homo sapiens
+sntc2_S58	0.6128	1153.899109	1883	11269	Marburg marburgvirus	1090.56	1768	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc2_S58	0.6146	541.4989	881	186540	Sudan ebolavirus	461.06	746	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc2_S58	0.6846	279.313	408	565995	Bundibugyo ebolavirus
+sntc2_S58	0.7967	274.08144	344	186538	Zaire ebolavirus	271.561	341	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc2_S58	0.5866	61.0045	104	186541	Tai Forest ebolavirus
+sntc2_S58	0.7481	20.9466	28	32630	synthetic construct
+sntc2_S58	0.5588	0.558758	1	80884	Colletotrichum higginsianum	0.558758	1	759273	no rank,Colletotrichum higginsianum IMI 349063
+zs2-3_S43	1.9478	946.637	486	9606	Homo sapiens
+zs2-3_S43	0.6030	746.5609	1238	11269	Marburg marburgvirus	684.779	1124	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs2-3_S43	1.1676	329.258141	282	186538	Zaire ebolavirus	328.449	281	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs2-3_S43	0.6138	306.3055	499	186540	Sudan ebolavirus	241.638	390	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs2-3_S43	0.6373	112.808	177	565995	Bundibugyo ebolavirus
+zs2-3_S43	0.6028	31.3431	52	186541	Tai Forest ebolavirus
+zs2-3_S43	0.7611	15.2217	20	32630	synthetic construct
+zs2-3_S43	0.6198	0.61983	1	5791	Physarum polycephalum
+zs6-3_S3	2.1503	41083.6329	19106	186538	Zaire ebolavirus	41069.9	19089	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs6-3_S3	1.6567	2619.32	1581	9606	Homo sapiens
+zs6-3_S3	0.6056	795.7206	1314	11269	Marburg marburgvirus	750.066	1230	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs6-3_S3	0.6115	436.6419	714	186540	Sudan ebolavirus	350.622	575	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs6-3_S3	0.8658	328.994	380	565995	Bundibugyo ebolavirus
+zs6-3_S3	0.6176	40.7595	66	186541	Tai Forest ebolavirus
+zs6-3_S3	0.6918	7.60929	11	32630	synthetic construct
+zs4-1_S21	1.8922	1245.04	658	9606	Homo sapiens
+zs4-1_S21	0.5871	485.5644	827	11269	Marburg marburgvirus	436.787	737	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs4-1_S21	0.6363	295.8787	465	186540	Sudan ebolavirus	208.782	332	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs4-1_S21	0.8094	204.781	253	565995	Bundibugyo ebolavirus
+zs4-1_S21	0.8160	143.61425	176	186538	Zaire ebolavirus	141.307	173	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs4-1_S21	0.6111	40.9438	67	186541	Tai Forest ebolavirus
+zs4-1_S21	0.7751	11.6262	15	32630	synthetic construct
+sntc6_S59	1.8500	764.037	413	9606	Homo sapiens
+sntc6_S59	0.6000	720.6321	1201	11269	Marburg marburgvirus	674.242	1115	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+sntc6_S59	0.6351	598.882	943	186540	Sudan ebolavirus	316.436	518	1216927	no rank,Sudan ebolavirus - Nakisamata
+sntc6_S59	0.8582	231.722141	270	186538	Zaire ebolavirus	230.913	269	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+sntc6_S59	0.6995	162.293	232	565995	Bundibugyo ebolavirus
+sntc6_S59	0.6178	22.2402	36	186541	Tai Forest ebolavirus
+sntc6_S59	0.7526	17.3092	23	32630	synthetic construct
+sntc6_S59	0.5170	0.517034	1	80884	Colletotrichum higginsianum	0.517034	1	759273	no rank,Colletotrichum higginsianum IMI 349063
+zs6-2_S2	2.1480	35401.3319	16481	186538	Zaire ebolavirus	35378.3	16457	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs6-2_S2	1.8378	17400.4	9468	9606	Homo sapiens
+zs6-2_S2	0.5933	652.0879	1099	11269	Marburg marburgvirus	599.222	1002	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs6-2_S2	0.6112	414.982	679	186540	Sudan ebolavirus	367.87	596	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs6-2_S2	0.7949	235.276	296	565995	Bundibugyo ebolavirus
+zs6-2_S2	0.6042	40.4785	67	186541	Tai Forest ebolavirus
+zs6-2_S2	0.7453	12.6704	17	32630	synthetic construct
+zs6-2_S2	0.8130	0.812965	1	5791	Physarum polycephalum
+zs6-2_S2	0.6627	0.662653	1	51315	Eimeria necatrix
+zs6-2_S2	0.6331	0.633056	1	80884	Colletotrichum higginsianum	0.633056	1	759273	no rank,Colletotrichum higginsianum IMI 349063
+zptc2_S20	2.3148	57464.3518	24825	186538	Zaire ebolavirus	57458.5	24818	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zptc2_S20	1.5043	3401.12	2261	9606	Homo sapiens
+zptc2_S20	0.6085	587.1826	965	11269	Marburg marburgvirus	567.292	928	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zptc2_S20	0.6220	497.565	800	186540	Sudan ebolavirus	348.073	566	1216927	no rank,Sudan ebolavirus - Nakisamata
+zptc2_S20	0.8209	346.412	422	565995	Bundibugyo ebolavirus
+zptc2_S20	0.6194	65.6539	106	186541	Tai Forest ebolavirus
+zptc2_S20	0.7077	16.276	23	32630	synthetic construct
+zs4-3_S23	2.4985	3770.24	1509	9606	Homo sapiens
+zs4-3_S23	0.6757	1216.275	1800	186540	Sudan ebolavirus	424.364	665	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs4-3_S23	0.6132	896.4741	1462	11269	Marburg marburgvirus	858.429	1392	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs4-3_S23	1.2425	362.81889	292	186538	Zaire ebolavirus	358.722	288	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs4-3_S23	0.8967	342.524	382	565995	Bundibugyo ebolavirus
+zs4-3_S23	0.6096	27.4314	45	186541	Tai Forest ebolavirus
+zs4-3_S23	0.7404	5.18287	7	32630	synthetic construct
+zs4-2_S22	2.4489	2546.82	1040	9606	Homo sapiens
+zs4-2_S22	0.6171	1032.45415	1673	11269	Marburg marburgvirus	963.081	1546	33727	no rank,Marburg virus - Musoke, Kenya, 1980
+zs4-2_S22	0.6624	822.079	1241	186540	Sudan ebolavirus	265.572	437	1216927	no rank,Sudan ebolavirus - Nakisamata
+zs4-2_S22	0.9333	294.934	316	565995	Bundibugyo ebolavirus
+zs4-2_S22	0.7718	209.94152	272	186538	Zaire ebolavirus	208.245	270	128952	no rank,Ebola virus - Mayinga, Zaire, 1976
+zs4-2_S22	0.5972	38.817	65	186541	Tai Forest ebolavirus
+zs4-2_S22	0.7727	10.8184	14	32630	synthetic construct
+zs4-2_S22	1.0183	1.01832	1	5791	Physarum polycephalum
