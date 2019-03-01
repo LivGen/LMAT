@@ -26,9 +26,11 @@ Input:
 
 ### Command Line
  ` ` `
-ls -1 \*.species \> file_lst;
-cat file_lst|perl g.pl >> concatenated.file;
-RScript BIOM.R concatenated.file;
+ls -1 \*.species > file_lst
+
+cat file_lst|perl g.pl >> concatenated.file
+
+RScript BIOM.R concatenated.file
  ` ` `
 Output: 
 All the files are stored in a RData environment as: concatenated.file.RData
