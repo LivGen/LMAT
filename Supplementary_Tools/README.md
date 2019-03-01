@@ -31,9 +31,11 @@ Each column would represent a sample and each row a taxonomical identification l
 ls -1 \*.species > file_lst
 
 #Merge the files with column showing proceeding filename
+
 cat file_lst|perl g.pl >> concatenated.file
 
 #Create BIOM tables
+
 RScript BIOM.R concatenated.file
  ```
 *Output:*
