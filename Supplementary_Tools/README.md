@@ -3,7 +3,7 @@
 This script/module converts LMAT output in a BIOM* format that is used in the phyloseq 
 R package.  Phyloseq is an R package with nice graphical features to analyze microbial census data.
 
-Some examples of its applications can be found here:
+Some examples of the Phyloseq applications can be found here:
 
 [link_to_paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217)
 
