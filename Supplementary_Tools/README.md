@@ -3,13 +3,13 @@
 This script/module converts LMAT output in a BIOM* format that is used in the phyloseq 
 R package.  Phyloseq is an R package with nice graphical features to analyze microbial census data.
 
-Some examples can be found here:
+Some examples of its applications can be found here:
 
-https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217
+[! link_to_paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217)
 
 and the package can be downloaded here: 
 
-https://bioconductor.org/packages/release/bioc/html/phyloseq.html
+[! Download](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 
 ### What it does?
 The BIOM tables are the following: OTU_Reads, OTU_RA, Tax_Full
