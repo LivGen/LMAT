@@ -11,4 +11,4 @@ else
      threshold=$2
 fi 
 
-/usr/bin/Rscript /usr/gapps/kpath/bin/BIOM.R $filename $threshold --save
+/usr/bin/Rscript BIOM.R $filename $threshold --save
