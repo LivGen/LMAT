@@ -46,4 +46,4 @@ RScript BIOM.R concatenated.file $threshold
 *Output:*
 All the files are stored in a RData environment as: concatenated.file.RData
 
-Some examples can be seen in the **Example** folder
+Some examples can be seen in the **Example** folder under LMAT-BIOM. Apologies for how some figures look in the pdf version, running the R markdown file will yield nicer graphics than the ones displayed in the pdf.
