@@ -34,9 +34,14 @@ ls -1 \*.species > file_lst
 
 cat file_lst|perl g.pl >> concatenated.file
 
-#Create BIOM tables
+#Merge the Tax_Reference files
 
-RScript BIOM.R concatenated.file
+cat Tax_Ref* >> Tax_Ref
+
+#Create BIOM tables
+$threshold=0 #This variable serves for pruning of reads
+
+RScript BIOM.R concatenated.file $threshold
  ```
 *Output:*
 All the files are stored in a RData environment as: concatenated.file.RData

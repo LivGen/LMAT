@@ -101,8 +101,8 @@ create_CONT <- function() {
 
 spfile <- read.csv(filename, head = F, sep = "\t", stringsAsFactors = F)
 
-rm <- c(9606,32630) #Remove Human and Synthetic construct
-spfile <- spfile[-which(spfile[,6] %in% rm),]
+rm <- c(32630) #Remove Human and Synthetic construct
+spfile <- spfile[-which(spfile[,5] %in% rm),]
 
 #Threshold
 
