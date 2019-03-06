@@ -1,0 +1,120 @@
+---
+title: "BIOM_Example"
+output:
+  html_document:
+    df_print: paged
+---
+### BIOM Example with Phyloseq Graphics
+
+This notebook shows how to import the BIOM tables in your code and use them within the phyloseq package for taxonomical analysis and visualization.
+
+```{r}
+#After cloning the github repo with 'git clone https://github.com/LivGen/LMAT.git'
+rm(list=ls())
+#setwd("LMAT/Supplementary_Tools")
+load("BIOM_concatenated.file.RData")
+```
+
+Lets check that all the tables got loaded with the right dimensions
+```{r}
+ls()
+print(dim(OTU_Reads))
+print(dim(OTU_RA))
+print(dim(Specie))
+```
+
+Now lets look at the headers of a couple of the data frames to get a sense of what information it has.
+
+```{r}
+head(OTU_Reads)
+head(Tax_Full)
+```
+
+Awesome! It seems like we sucessfully retrieve the sample information for each taxonomical identification.
+Of course there are other interesting information in the other fastsummaries such as counts per genus and counts unlabelled. But we will focus on reads at specie level.
+
+In this sample test, we have 13 taxonomical identifications at the specie level among all the 25 samples.  Now lets explore this data withs some of the features in phyloseq. If you encounter installation errors please see this page: https://joey711.github.io/phyloseq/install.html
+
+```{r include=FALSE}
+#Install and load package 
+#source('http://bioconductor.org/biocLite.R')
+#biocLite('phyloseq')
+library('phyloseq')
+```
+
+## Some Vizualizations##
+
+Multiple merging, analysis and vizualizations of the data can be seen in the Tutorials section of the above mentioned page. Lets see the abundance representation per genus in each of the samples, in the *plot_bar()* method the parameter "fill=" helps to make that subsetting of the data.
+
+
+```{r}
+#We have to create a phyloseq object
+otu=otu_table(as.matrix(OTU_Reads),taxa_are_rows=T)
+taxa=tax_table(as.matrix(Tax_Full))
+physeq=phyloseq(otu,taxa)
+
+
+#Lets see the abundance representation per genus in each of the samples per
+plot_bar(physeq,fill="genus")
+```
+Above we can see that majority of the composition of our dataset is based on Human and Ebolavirus reads, this can give us the insight that these samples are of human individuals infected with some type of virus. 
+
+### Heatmap ###
+
+Now lets look at intensities of abundance of reads using a heatmap using a plot_heatmap()
+```{r}
+plot_heatmap(physeq,taxa.label = "specie")
+```
+Non ebolavirus species have a low abundance in these samples [DARK color]. We can prune these reads out using subset_taxa() to only have "Ebolavirus reads" or prune_samples() if we want our sample at least certain amount of reads.
+
+
+```{r}
+physeq1=subset_taxa(physeq,genus=="Ebolavirus")
+plot_heatmap(physeq1,taxa.label = "specie")
+
+```
+
+Much better, here we can see that samples"zptc and zs6" have the highest abundance of Zaire ebolavirus.
+
+
+### Hierarchical Clustering ###
+
+Although I have not provided any type of information about this dataset or the relationships of each of the samples, we can start by applying a Hierarchical Clustering algorithm to get an insight on how these samples may be related to one another, perhaps they are cases/control as we may asume by the above heatmap.
+
+I have chosen to implement complete linkage, to account for distances in between clusters by looking at the furthest member of the cluster. 
+
+```{r}
+#Lets call the HC package
+#library(hclust)
+
+#Lets use the above OTU_Reads matrx
+
+data<-scale(t(as.matrix(OTU_Reads)))
+d<-dist(data,method="euclidean")
+hc=hclust(d,method="complete")
+plot(hc)
+
+
+```
+
+Above we can see some relationships between samples, one relationship that comes out is of sample zs6-3 and zptc2, which had an abundance of zaire ebolavirus.
+
+### Shannon Entropy ###
+
+There are many more vizualizations that can be done with phyloseq, you can add sample information, to denote if your samples come from a different origin. Lets calculate the Shannon Entropy as diversity measure, for the sample type. The more diverse the more entropy.
+```{r}
+#Lets create some origins/sample type for our 13 samples.
+types=c("SOIL","SPACE","SEA")
+sample_type=sample(types,length(sample_names(physeq1)),replace=T)
+
+#Lets create a data frame to store this information
+source_sample=data.frame(Location=sample_type,row.names=sample_names(physeq1))
+
+#Add this extra information to the phyloseq object
+sample_data(physeq1)=source_sample
+plot_richness(physeq1,x="Location",measures = "Shannon")
+
+```
+
+
+This concludes the example.
