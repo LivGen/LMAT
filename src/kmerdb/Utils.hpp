@@ -1,19 +1,59 @@
 #ifndef __UTILS_HPP__
 #define __UTILS_HPP__
 
-//#include <cstdio>
-//#include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include <map>
+#include <sstream>
+#include <string>
 #include <stdint.h>
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+#include <vector>
+
+// the "raw" prefix table
+using td_t = std::set<uint32_t>;
+using db_t = std::map<uint64_t, td_t>;
+
+#define DEFAULT_KMER_LEN 20
+
+#define SANITY_INTERVAL 1000
+
+#define LMAT_ERR(e) { \
+  std::cerr << "ERROR! file: " << __FILE__ << " line: " << __LINE__  \
+            << "; error: " << e << std::endl; \
+  exit(9); \
+}
+
+#define FWRITE_STATUS(b) { \
+  if (b != 1) { \
+    std::cerr << "ERROR; file: "<<__FILE__<<"; line: "<<__LINE__<<"; err_msg: fwrite failed\n"; \
+    exit(9); \
+  }}   
+
+#define FREAD_STATUS(b) { \
+  if (b != 1) { \
+    std::cerr << "ERROR; file: "<<__FILE__<<"; line: "<<__LINE__<<"; err_msg: fread failed\n"; \
+    exit(9); \
+  }}   
+
+// reads a list of filenames from 'fn'
+void get_filenames(const std::string fn, std::vector<std::string> &filenames); 
+
+// Formats number with commas for easier comprehe;nsion
+std::string commify(size_t n);
+
+std::string get_binary_filename(int thread_id, uint64_t prefix, std::string base_output_dir); 
 
 namespace metag {
     /*
-     * static methods that aren't particular to any specific class
+     * static functions that aren't particular to any specific class
      *
      */
     
+void print_invocation(int argc, char **argv);
+
     // a string of 64 1s after every SANITY_FREQUENCY kmers
 #define SANITY_FREQUENCY 1000
     
@@ -83,6 +123,8 @@ exit(0); }
         static void showBits(uint64_t kmer, uint64_t num_to_print);
         
     };
+
     
-}
+} // namespace metag 
+
 #endif

@@ -4,7 +4,8 @@
 #include <string>
 #include <fstream>
 #include <set>
-#include "all_headers.hpp"
+#include <algorithm>
+//#include "all_headers.hpp"
 
 using namespace std;
 using namespace metag;
@@ -230,3 +231,53 @@ void Utils::showBits(uint64_t kmer, uint64_t num_to_print) {
     
 }
 
+std::string commify(size_t n) {
+  std::string s = std::to_string(n);
+  std::stringstream s2;
+  int c = 0;
+  for (int j = (int)s.size()-1; j>=0; j--) {
+    s2 << s[j];
+    ++c;
+    if (c == 3) {
+      if (j > 0) {
+        s2 << ",";
+        c = 0;
+      }
+    }
+  }
+  std::string r = s2.str();
+  std::reverse(r.begin(), r.end());
+  return r;
+}
+
+void get_filenames(const string fn, vector<string> &filenames) {
+  cout << "opening: " << fn << " for reading input filenames" << endl;
+  ifstream in(fn.c_str());
+  if (!in) {
+      cerr << "failed to open " << fn << " for reading\n";
+      exit(1);
+  }
+
+  string line;
+  filenames.clear();
+  while (getline(in, line)) {
+    if (line.size() > 3) {
+      filenames.push_back(line);
+    }
+  }
+  cout << "read " << filenames.size() << " input filenames\n";
+}
+
+void print_invocation(int argc, char **argv) {
+  cout << "invocation: ";
+  for (int j=0; j<argc; j++) {
+    cout << argv[j] << " ";
+  }
+  cout << endl;
+}
+
+string get_binary_filename(int thread_id, uint64_t prefix, string base_output_dir) {
+  stringstream s;
+  s << base_output_dir << ".prefix=" << prefix << "_thread=" << thread_id;
+  return s.str();
+}
