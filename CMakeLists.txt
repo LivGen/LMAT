@@ -124,7 +124,7 @@ ENDIF()
 ## Project declaration
 ##
 
-project(LMAT VERSION 1.2.4.2018 LANGUAGES C CXX)
+project(LMAT VERSION 1.2.4.2020 LANGUAGES C CXX)
 
 #
 # Add the right compiler flags
@@ -135,8 +135,8 @@ project(LMAT VERSION 1.2.4.2018 LANGUAGES C CXX)
 #            -DIDX_CONFIG=$(SDBIDX) -DTID_SIZE=$(TAXID_SIZE)  -DDBTID_T=$(TID_T) -Wno-deprecated \
 #	     -DUSE_SORTED_DB=$(USE_SORTED_DB)
 
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -std=c++0x -DIDX_CONFIG=${SDBIDX} -DTID_SIZE=${TAXID_SIZE} -DDBTID_T=${TID_T} -DUSE_SORTED_DB=${USE_SORTED_DB} -DWITH_PJMALLOC=${PJMALLOC}")
+# Set std to gnu++17 to avoid issues with -std=c++0x with GCC version >8 compiling kmerdb/TaxTable
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -std=gnu++17 -DIDX_CONFIG=${SDBIDX} -DTID_SIZE=${TAXID_SIZE} -DDBTID_T=${TID_T} -DUSE_SORTED_DB=${USE_SORTED_DB} -DWITH_PJMALLOC=${PJMALLOC}")
 if(USE_BOOST)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DUSE_BOOST=${USE_BOOST}")
 endif()
@@ -146,6 +146,11 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -O0 -Wall")  # -fpermissive")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -g -O0 -Wall")  # -fpermissive")
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -w -Wno-deprecated")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -w -Wno-deprecated")
+
+# Specific GNU compiler flags
+IF(DEFINED IS_GNU)
+  # This is for GCC 
+ENDIF()
 
 # Specific Intel compiler flags
 IF(DEFINED IS_INTEL)
@@ -306,7 +311,7 @@ add_custom_target(_LMAT_1_2_4 ALL
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "=============================================="
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan  "  Livermore  Metagenomics  Analysis  Toolkit  "
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "=============================================="
-                  COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan  "  ========== Release 1.2.4 [2018] ==========  "
+                  COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan  "  ========== Release 1.2.4 [2020] ==========  "
                   COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green "=============================================="
                   COMMAND ${CMAKE_COMMAND} -E echo ""
                  )
