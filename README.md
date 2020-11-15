@@ -23,7 +23,7 @@ The quick installation procedure will use CMake to ease the process, by download
 
 ``redoall`` is a convenient wrapper that will direct the installation through CMake for typical compilers (GNU gcc, clang/LLVM, Intel C/C++ compilers and IBM XL compilers for Power 8 and 9):
 ```
-usage: redoall [profile] [compiler]
+usage: redoall.sh [profile] [compiler]
 ```
 
 The 1st optional parameter chooses the build profile of CMake:
@@ -45,7 +45,7 @@ The 2nd optional parameter selects the compiler family:
 ```
 git clone https://github.com/LivGen/LMAT.git
 cd LMAT
-./redoall
+./redoall.sh
 ```
 
 #### Example for Intel compilers (debug profile)
@@ -53,7 +53,7 @@ cd LMAT
 ```
 git clone https://github.com/LivGen/LMAT.git
 cd LMAT
-./redoall D intel
+./redoall.sh D intel
 ```
 
 
@@ -68,9 +68,9 @@ cd LMAT
 
 ### Post-processing with Recentrifuge
 
-If you are analyzing more than one sample with LMAT you can easily visualize and compare them using [Recentrifuge: Robust comparative analysis and contamination removal for metagenomic data](https://github.com/khyox/recentrifuge).
+If you are analyzing more than one sample with LMAT you can easily visualize and compare them using [Recentrifuge: Robust comparative analysis and contamination removal for metagenomics](https://github.com/khyox/recentrifuge).
 
-With a score-oriented approach, Recentrifuge is especially useful in the case of low biomass metagenomic studies or when a more reliable detection of minority organisms is needed, like in clinical, environmental and forensic analysis. Further details are in the [bioRxiv pre-print](https://doi.org/10.1101/190934).
+With a score-oriented approach, Recentrifuge is especially useful in the case of low microbial biomass studies and when a more reliable detection of minority organisms is needed, like in clinical, environmental, and forensic applications. For further details, please check the [PLOS CB article](https://doi.org/10.1371/journal.pcbi.1006967). 
 
 For usage and documentation, please, see [running Recentrifuge for LMAT](https://github.com/khyox/recentrifuge/wiki/Running-recentrifuge-for-LMAT) in the [Recentrifuge wiki](https://github.com/khyox/recentrifuge/wiki/). 
 
